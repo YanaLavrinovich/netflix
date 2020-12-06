@@ -1,0 +1,10 @@
+.movies-search-results-count {
+    color: #ffffff;
+    align-items: center;
+    font-size: larger;
+    margin: 30px 0 30px 0;
+}
+
+.movies-search-results-count-number {
+    font-weight: bold;
+}

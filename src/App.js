@@ -1,25 +1,21 @@
-import logo from './logo.svg';
+import {Footer} from './modules/footer/Footer.js'
+import {MovieContainer} from "./modules/movies/MovieContainer";
+import React from "react";
+import {Header} from "./modules/header/Header";
+import {ErrorBoundary} from "./errorBoundary/ErrorBoundary";
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <>
+            <ErrorBoundary>
+                <Header/>
+                <MovieContainer/>
+
+            </ErrorBoundary>
+            <Footer/>
+        </>
+    );
 }
 
 export default App;

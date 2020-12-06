@@ -1,0 +1,18 @@
+.filters-container {
+    box-shadow: 0 2px;
+    border-bottom: #555555 solid;
+    margin-bottom: -2px;
+    height: 50px;
+}
+
+.filter-btn {
+    color: #ffffff;
+    background: none;
+    padding: 0;
+    margin-right: 20px;
+}
+
+.filter-btn:hover {
+    border-bottom: #f65261 solid 2px;
+    border-radius: 0;
+}

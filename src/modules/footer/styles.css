@@ -1,0 +1,12 @@
+.footer {
+    clear: both;
+    position: relative;
+    height: 75px;
+    background-color: #424242;
+    text-align: center;
+}
+
+.footer-logo {
+    margin: 0;
+    padding-top: 25px;
+}
