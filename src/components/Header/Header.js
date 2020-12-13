@@ -11,7 +11,7 @@ export const Header = ({onAddMovieClick}) => {
         <div className='header'>
             <NavBar>
                 <HeaderLogo><b>netflix</b>roulette</HeaderLogo>
-                <ShadowButton type='add' onClick={onAddMovieClick}>+ ADD MOVIE</ShadowButton>
+                <ShadowButton onClick={onAddMovieClick}>+ ADD MOVIE</ShadowButton>
             </NavBar>
             <MovieSearcher/>
         </div>

@@ -5,13 +5,14 @@ import PropTypes from 'prop-types';
 import {Label} from '../Label/Label';
 
 export const MovieList = props => {
-    const {movies, onMovieDelete} = props
+    const {movies, onMovieDelete, onMovieEdit} = props
     return (
         <>
             <Label><b>{movies ? movies.length : 0}</b> movies found</Label>
             <div className='movie-list'>
                 {movies && movies.map(movie => {
-                    return <MovieCard key={movie.id} movie={movie} onMovieDelete={onMovieDelete}/>
+                    return <MovieCard key={movie.id} movie={movie} onMovieDelete={onMovieDelete}
+                                      onMovieEdit={onMovieEdit}/>
                 })}
             </div>
         </>
@@ -24,5 +25,6 @@ MovieList.propTypes = {
             id: PropTypes.number.isRequired,
         })
     ),
-    onMovieDelete: PropTypes.func
+    onMovieDelete: PropTypes.func,
+    onMovieEdit: PropTypes.func
 }

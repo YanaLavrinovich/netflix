@@ -3,13 +3,14 @@ import {Popup} from '../Popup/Popup.js';
 import './styles.css'
 import {MovieForm} from '../MovieForm/MovieForm';
 
-export function AddMoviePopup({onClose, onSubmit, onMovieChange}) {
+export function EditMoviePopup({movie, onClose, onSubmit}) {
+    console.log(movie)
     return (
         <Popup
-            title='ADD MOVIE'
+            title='EDIT MOVIE'
             onClose={onClose}
         >
-            <MovieForm onMovieChange={onMovieChange} onSubmit={onSubmit}/>
+            <MovieForm movie={movie} onSubmit={onSubmit}/>
         </Popup>
     )
 }

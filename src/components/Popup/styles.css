@@ -7,20 +7,38 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    background-color: rgba(0, 0, 0, 0.5);
     z-index: 50;
 }
 
-.popup_inner {
+.popup {
     position: absolute;
-    left: 25%;
-    right: 25%;
-    top: 25%;
-    bottom: 25%;
+    left: auto;
+    margin-top: 60px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.popup_inner {
     margin: auto;
+    position: relative;
+    width: 800px;
     background: #232323;
 }
 
+.popup_header {
+    padding-top: 20px;
+}
+
 .popup-title-color {
+    color: #ffffff;
+    margin-left: 60px;
+}
+
+.close {
+    background-color: transparent;
+    border: 0;
+    float: right;
+    font-size: 100px;
+    line-height: 1;
     color: #ffffff;
 }

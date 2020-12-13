@@ -12,7 +12,8 @@ export const MovieContainer = ({
                                    selectedSort,
                                    onSortChange,
                                    onGenreFilterChange,
-                                   onMovieDelete
+                                   onMovieDelete,
+                                   onMovieEdit
                                }) => {
     return (
         <div className='movie-container'>
@@ -24,7 +25,7 @@ export const MovieContainer = ({
                 onGenreFilterChange={onGenreFilterChange}
                 onSortChange={onSortChange}
             />
-            <MovieList movies={movies} onMovieDelete={onMovieDelete}/>
+            <MovieList movies={movies} onMovieDelete={onMovieDelete} onMovieEdit={onMovieEdit}/>
         </div>
     )
 }
@@ -37,5 +38,6 @@ MovieContainer.propTypes = {
     selectedSort: PropTypes.string,
     onSortChange: PropTypes.func,
     onGenreFilterChange: PropTypes.func,
-    onMovieDelete: PropTypes.func
+    onMovieDelete: PropTypes.func,
+    onMovieEdit: PropTypes.func,
 }

@@ -5,24 +5,20 @@ import {Footer} from '../../components/Footer/Footer';
 import {FooterLogo} from '../../components/FooterLogo/FooterLogo';
 import {genres, movies, sortOptions} from './MovieConstants.js';
 import React from 'react';
-import {MoviePopup} from '../../components/MoviePopup/MoviePopup';
 import {sortByField} from './MovieListUtil';
+import {AddMoviePopup} from "../../components/AddMoviePopup/AddMoviePopup";
+import {DeleteMoviePopup} from "../../components/DeleteMoviePopup/DeleteMoviePopup";
+import {EditMoviePopup} from "../../components/EditMoviePopup/EditMoviePopup";
 
 
 export class MovieListPage extends React.PureComponent {
     state = {
-        showPopup: false,
-        typePopup: 'add',
-        selectedGenre: '1',
+        visiblePopupName: '',
+        selectedGenre: 'all',
         selectedSort: 'year',
         movies: movies,
-        editedMovie: {}
+        currentMovieId: ''
     };
-
-    componentDidMount() {
-        const sortedMovies = sortByField(this.state.movies, this.state.selectedSort)
-        this.setState({movies: sortedMovies})
-    }
 
     getFilteredMovies = () => {
         const filterType = genres.find(filter => filter.id === this.state.selectedGenre)?.name
@@ -35,25 +31,47 @@ export class MovieListPage extends React.PureComponent {
         return sortByField(filteredMovies, this.state.selectedSort)
     }
 
-    deleteMovie = id => {
-        const newMovies = [...movies].filter(movie => movie.id !== id)
-        this.setState({movies: newMovies})
+    handleOnEditClick = (id) => {
+        this.setCurrentMovieId(id)
+        this.togglePopup('edit')
     }
 
-    addMovie = () => {
-
-    }
-
-    togglePopup = (type) => {
+    handleMovieEditSubmit = (movie) => {
+        const editedMovies = this.state.movies
+        const index = editedMovies.findIndex(m => m.id === movie.id)
         this.setState({
-            showPopup: !this.state.showPopup,
-            typePopup: type || this.state.typePopup
+            movies: [...editedMovies.slice(0, index), movie, ...editedMovies.slice(index + 1, editedMovies.length)]
+        })
+        this.togglePopup('')
+    }
+
+    handleMovieDelete = () => {
+        const editedMovies = this.state.movies
+        const index = editedMovies.findIndex(m => m.id === this.state.currentMovieId)
+        this.setState({
+            movies: [...editedMovies.slice(0, index), ...editedMovies.slice(index + 1, editedMovies.length)]
+        })
+        this.togglePopup('')
+    }
+
+    setCurrentMovieId = (id) => {
+        this.setState({currentMovieId: id})
+    }
+
+    togglePopup = (popupName) => {
+        this.setState({
+            visiblePopupName: popupName
         });
     }
 
-    handleConfirmPopup = () => {
-        //delete movie
-        this.togglePopup()
+    handleOnDeleteClick = (id) => {
+        this.setCurrentMovieId(id)
+        this.togglePopup('delete')
+    }
+
+    handleSubmitMovie = (movie) => {
+        this.setState({movies: [...this.state.movies, movie]})
+        this.togglePopup('')
     }
 
     handleSortChange = (e) => {
@@ -65,10 +83,11 @@ export class MovieListPage extends React.PureComponent {
     }
 
     render() {
+        console.log(this.state.visiblePopupName)
         return (
             <>
                 <ErrorBoundary>
-                    <Header onAddMovieClick={this.togglePopup}/>
+                    <Header onAddMovieClick={() => this.togglePopup('add')}/>
                     <MovieContainer
                         genres={genres}
                         selectedGenre={this.state.selectedGenre}
@@ -77,14 +96,26 @@ export class MovieListPage extends React.PureComponent {
                         selectedSort={this.state.selectedSort}
                         onGenreFilterChange={this.handleGenreFilterChange}
                         onSortChange={this.handleSortChange}
-                        onMovieDelete={this.togglePopup}
+                        onMovieDelete={this.handleOnDeleteClick}
+                        onMovieEdit={this.handleOnEditClick}
                     />
-                    <MoviePopup
-                        type={this.state.typePopup}
-                        onClose={this.togglePopup}
-                        onConfirm={this.handleConfirmPopup}
-                        isShow={this.state.showPopup}
-                    />
+                    {this.state.visiblePopupName === 'add' &&
+                    <AddMoviePopup
+                        editedMovie={this.state.editedMovie}
+                        onSubmit={this.handleSubmitMovie}
+                        onClose={() => this.togglePopup('')}/>
+                    }
+                    {this.state.visiblePopupName === 'edit' &&
+                    <EditMoviePopup
+                        movie={this.state.movies.find(movie => movie.id === this.state.currentMovieId)}
+                        onSubmit={this.handleMovieEditSubmit}
+                        onClose={() => this.togglePopup('')}/>
+                    }
+                    {this.state.visiblePopupName === 'delete' &&
+                    <DeleteMoviePopup
+                        onConfirm={this.handleMovieDelete}
+                        onClose={() => this.togglePopup('')}/>
+                    }
                 </ErrorBoundary>
                 <Footer>
                     <FooterLogo>

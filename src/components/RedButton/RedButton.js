@@ -9,6 +9,6 @@ export function RedButton({children, onClick}) {
 }
 
 RedButton.propTypes = {
-    children: PropTypes.array,
+    children: PropTypes.string,
     onClick: PropTypes.func
 }

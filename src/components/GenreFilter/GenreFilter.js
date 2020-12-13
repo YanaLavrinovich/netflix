@@ -8,8 +8,8 @@ export const GenreFilter = ({genres, selectedGenre, onGenreFilterChange}) => {
         <div className='genre-filter'>
             {
                 genres && genres.map(genre => {
-                    return <GenreButton key={genre.id} type={genre.id} isActive={genre.id === selectedGenre}
-                                        onClick={onGenreFilterChange}>{genre.name}</GenreButton>
+                    return <GenreButton key={genre.id} isActive={genre.id === selectedGenre}
+                                        onClick={() => onGenreFilterChange(genre.id)}>{genre.name}</GenreButton>
                 })
             }
         </div>

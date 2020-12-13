@@ -4,16 +4,19 @@
     height: auto;
 }
 
-.image-container {
+.movie-card-image-container {
     position: relative;
     width: 100%;
+    text-align: right;
 }
 
-.image-button {
+.movie-card-actions-open {
+    transition: .5s ease;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 10%;
+    left: 80%;
+    text-align: center;
+    border-radius: 50%;
     background-color: #232323;
     color: white;
     font-size: 16px;
@@ -21,9 +24,56 @@
     border: none;
     cursor: pointer;
     border-radius: 50%;
-    display: none;
+    font-size: larger;
+    font-weight: bold;
 }
 
-.image-container:hover .image-button {
+.movie-card-action {
+    display: block;
+    border: none;
+    background-color: #232323;
+    color: #ffffff;
+    font-size: larger;
+    width: 200px;
+    text-align: left;
+    padding: 10px 10px 10px 15px;
+}
+
+.movie-card-actions-close {
+    display: block;
+    border: none;
+    background-color: #232323;
+    color: #ffffff;
+    font-size: larger;
+    width: 200px;
+    text-align: right;
+    padding: 10px 10px 10px 15px;
+}
+
+.movie-card-action:hover {
+    background-color: #f65261;
+}
+
+.image-container:hover .movie-card-actions-open {
     display: inline-block;
+}
+
+.movie-card-actions-container {
+    transition: .5s ease;
+    position: absolute;
+    top: 2%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+    opacity: 0;
+}
+
+.movie-card-image-container:hover .movie-card-actions-container {
+    opacity: 1;
+}
+
+.movie-card-actions {
+    margin-top: 120px;
+    margin-right: 70px;
 }

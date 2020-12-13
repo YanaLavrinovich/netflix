@@ -9,5 +9,5 @@ export function SearchTitle({children}) {
 }
 
 SearchTitle.propTypes = {
-    children: PropTypes.array
+    children: PropTypes.string
 }

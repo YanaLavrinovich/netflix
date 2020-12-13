@@ -9,5 +9,5 @@ export function ShadowLabel({children}) {
 }
 
 ShadowLabel.propTypes = {
-    children: PropTypes.array
+    children: PropTypes.string
 }
