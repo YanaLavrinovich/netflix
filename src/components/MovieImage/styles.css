@@ -1,0 +1,29 @@
+.movie-card-img {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: auto;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+}
+
+.image-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #232323;
+    color: white;
+    font-size: 16px;
+    padding: 20px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    display: none;
+}
+
+.image-container:hover .image-button {
+    display: inline-block;
+}

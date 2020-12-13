@@ -1,0 +1,7 @@
+.movie-searcher {
+    position: relative;
+    z-index: 3;
+    margin-left: 170px;
+    margin-top: 50px;
+    margin-right: 60px;
+}

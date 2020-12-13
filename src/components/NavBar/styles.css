@@ -1,0 +1,8 @@
+.nav-bar {
+    position: relative;
+    z-index: 3;
+    padding: 5px 60px 0 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
