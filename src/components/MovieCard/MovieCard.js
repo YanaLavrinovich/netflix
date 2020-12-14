@@ -31,9 +31,9 @@ MovieCard.propTypes = {
     movie: PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-        year: PropTypes.number.isRequired
+        description: PropTypes.string,
+        image: PropTypes.string,
+        year: PropTypes.string.isRequired
     }).isRequired,
     onMovieDelete: PropTypes.func,
     onMovieEdit: PropTypes.func

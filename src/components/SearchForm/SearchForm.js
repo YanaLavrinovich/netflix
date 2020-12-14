@@ -5,7 +5,7 @@ import {RedButton} from '../RedButton/RedButton';
 import './styles.css';
 import PropTypes from 'prop-types';
 
-export const SearchForm = ({title, searchLabel}) => {
+export function SearchForm({title, searchLabel}) {
     return (
         <form className='search-form'>
             <SearchTitle>{title}</SearchTitle>
@@ -15,7 +15,7 @@ export const SearchForm = ({title, searchLabel}) => {
             </div>
         </form>
     )
-};
+}
 
 SearchForm.propTypes = {
     title: PropTypes.string,

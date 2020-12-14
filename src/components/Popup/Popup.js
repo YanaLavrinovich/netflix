@@ -1,13 +1,13 @@
 import React from 'react';
 import './styles.css';
+import {CloseButton} from "../CloseButton/CloseButton";
+import PropTypes from 'prop-types';
 
-export const Popup = ({onClose, title, children}) => {
+export function Popup({onClose, title, children}) {
     return (
         <div className='popup'>
             <div className='popup_inner'>
-                <button type="button" className="close" onClick={onClose}>
-                    <span>×</span>
-                </button>
+                <CloseButton onClick={onClose}/>
                 <div className='popup_header'>
                     <h1 className='popup-title-color'>{title}</h1>
                 </div>
@@ -15,4 +15,10 @@ export const Popup = ({onClose, title, children}) => {
             </div>
         </div>
     );
+}
+
+Popup.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    title: PropTypes.string,
+    children: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
 }

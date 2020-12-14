@@ -7,7 +7,7 @@ export const MovieCardInfo = ({movie}) => {
         <div className='movie-card-info'>
             <div className='movie-card-info-row'>
                 <h3 className='movie-card-info-name'>{movie.title}</h3>
-                <p className='movie-card-info-year'>{movie.year}</p>
+                <p className='movie-card-info-year'>{movie.year.substr(0, 4)}</p>
             </div>
             <p className='movie-card-info-description'>{movie.description}</p>
         </div>
@@ -17,7 +17,7 @@ export const MovieCardInfo = ({movie}) => {
 MovieCardInfo.propTypes = {
     movie: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        year: PropTypes.number.isRequired
+        description: PropTypes.string,
+        year: PropTypes.string.isRequired
     }).isRequired
 }

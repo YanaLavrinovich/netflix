@@ -10,51 +10,7 @@
     text-align: right;
 }
 
-.movie-card-actions-open {
-    transition: .5s ease;
-    position: absolute;
-    top: 10%;
-    left: 80%;
-    text-align: center;
-    border-radius: 50%;
-    background-color: #232323;
-    color: white;
-    font-size: 16px;
-    padding: 20px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 50%;
-    font-size: larger;
-    font-weight: bold;
-}
-
-.movie-card-action {
-    display: block;
-    border: none;
-    background-color: #232323;
-    color: #ffffff;
-    font-size: larger;
-    width: 200px;
-    text-align: left;
-    padding: 10px 10px 10px 15px;
-}
-
-.movie-card-actions-close {
-    display: block;
-    border: none;
-    background-color: #232323;
-    color: #ffffff;
-    font-size: larger;
-    width: 200px;
-    text-align: right;
-    padding: 10px 10px 10px 15px;
-}
-
-.movie-card-action:hover {
-    background-color: #f65261;
-}
-
-.image-container:hover .movie-card-actions-open {
+.image-container:hover {
     display: inline-block;
 }
 
@@ -71,9 +27,4 @@
 
 .movie-card-image-container:hover .movie-card-actions-container {
     opacity: 1;
-}
-
-.movie-card-actions {
-    margin-top: 120px;
-    margin-right: 70px;
 }

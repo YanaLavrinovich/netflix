@@ -5,7 +5,7 @@ import {Footer} from '../../components/Footer/Footer';
 import {FooterLogo} from '../../components/FooterLogo/FooterLogo';
 import {genres, movies, sortOptions} from './MovieConstants.js';
 import React from 'react';
-import {sortByField} from './MovieListUtil';
+import {getRandomIntInclusive, sortByField} from './MovieListUtil';
 import {AddMoviePopup} from "../../components/AddMoviePopup/AddMoviePopup";
 import {DeleteMoviePopup} from "../../components/DeleteMoviePopup/DeleteMoviePopup";
 import {EditMoviePopup} from "../../components/EditMoviePopup/EditMoviePopup";
@@ -70,6 +70,7 @@ export class MovieListPage extends React.PureComponent {
     }
 
     handleSubmitMovie = (movie) => {
+        movie.id = getRandomIntInclusive(1, 1000000)
         this.setState({movies: [...this.state.movies, movie]})
         this.togglePopup('')
     }
@@ -83,7 +84,6 @@ export class MovieListPage extends React.PureComponent {
     }
 
     render() {
-        console.log(this.state.visiblePopupName)
         return (
             <>
                 <ErrorBoundary>

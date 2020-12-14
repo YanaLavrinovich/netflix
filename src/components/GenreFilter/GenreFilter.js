@@ -3,7 +3,7 @@ import './styles.css'
 import PropTypes from 'prop-types';
 import {GenreButton} from '../GenreButton/GenreButton';
 
-export const GenreFilter = ({genres, selectedGenre, onGenreFilterChange}) => {
+export function GenreFilter({genres, selectedGenre, onGenreFilterChange}) {
     return (
         <div className='genre-filter'>
             {

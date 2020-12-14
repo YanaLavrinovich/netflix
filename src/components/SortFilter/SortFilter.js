@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import {Select} from '../Select/Select';
 import {ShadowLabel} from '../ShadowLabel/ShadowLabel';
 
-export const SortFilter = props => {
-    const {sortOptions, selectedSort, onSortChange} = props
+export function SortFilter({sortOptions, selectedSort, onSortChange}) {
     return (
         <div className='sort-filter'>
             <ShadowLabel>SORT BY</ShadowLabel>

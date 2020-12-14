@@ -1,6 +1,8 @@
 import React from 'react';
 import './styles.css'
 import {RedButton} from "../RedButton/RedButton";
+import {FormGroup} from "../FormGroup/FormGroup";
+import {BorderButton} from "../BorderButton/BorderButton";
 
 export class MovieForm extends React.PureComponent {
 
@@ -20,65 +22,40 @@ export class MovieForm extends React.PureComponent {
     }
 
     handleFieldChange = (fieldName, value) => {
-        this.setState({[fieldName]: value}, () => console.log(this.state));
+        this.setState({[fieldName]: value});
     }
 
     handleResetClick = () => {
-        if (this.props.movie) {
-            this.setState({...this.props.movie})
-        } else {
-            this.setState({
-                title: '',
-                year: '',
-                movieUrl: '',
-                genre: '',
-                overview: '',
-                runtime: ''
-            })
-        }
+        this.setState({
+            title: '',
+            year: '',
+            movieUrl: '',
+            genre: '',
+            overview: '',
+            runtime: ''
+        }, () => this.props.movie && this.setState({...this.props.movie}))
     }
 
     render() {
         return (
             <>
                 <div>
-                    <div className='form-group'>
-                        <label className='form-input-label'>TITLE</label>
-                        <input className='form-input' placeholder='Title here' name='title' value={this.state.title}
-                               onChange={(e) => this.handleFieldChange('title', e.target.value)}/>
-                    </div>
-                    <div className='form-group'>
-                        <label className='form-input-label'>RELEASE DATE</label>
-                        <input type='date' className='form-input' placeholder='Select Date' name='year'
-                               value={this.state.year}
-                               onChange={(e) => this.handleFieldChange('year', e.target.value)}/>
-                    </div>
-                    <div className='form-group'>
-                        <label className='form-input-label'>MOVIE URL</label>
-                        <input className='form-input' placeholder='Movie URL here' name='movieUrl'
-                               value={this.state.movieUrl}
-                               onChange={(e) => this.handleFieldChange('movieUrl', e.target.value)}/>
-                    </div>
-                    <div className='form-group'>
-                        <label className='form-input-label'>GENRE</label>
-                        <input className='form-input' placeholder='Genre here' name='genre' value={this.state.genre}
-                               onChange={(e) => this.handleFieldChange('genre', e.target.value)}/>
-                    </div>
-                    <div className='form-group'>
-                        <label className='form-input-label'>OVERVIEW</label>
-                        <input className='form-input' placeholder='Overview here' name='overview'
-                               value={this.state.overview}
-                               onChange={(e) => this.handleFieldChange('overview', e.target.value)}/>
-                    </div>
-                    <div className='form-group'>
-                        <label className='form-input-label'>RUNTIME</label>
-                        <input className='form-input' placeholder='Runtime here' name='runtime'
-                               value={this.state.runtime}
-                               onChange={(e) => this.handleFieldChange('runtime', e.target.value)}/>
-                    </div>
+                    <FormGroup label='TITLE' value={this.state.title} placeholder='Title here'
+                               onFieldChange={this.handleFieldChange} fieldName='title'/>
+                    <FormGroup type='date' label='RELEASE DATE' value={this.state.year} placeholder='Select Date'
+                               onFieldChange={this.handleFieldChange} fieldName='year'/>
+                    <FormGroup label='MOVIE URL' value={this.state.movieUrl} placeholder='Movie URL here'
+                               onFieldChange={this.handleFieldChange} fieldName='movieUrl'/>
+                    <FormGroup label='GENRE' value={this.state.genre} placeholder='Genre here'
+                               onFieldChange={this.handleFieldChange} fieldName='genre'/>
+                    <FormGroup label='OVERVIEW' value={this.state.overview} placeholder='Overview here'
+                               onFieldChange={this.handleFieldChange} fieldName='overview'/>
+                    <FormGroup label='RUNTIME' value={this.state.runtime} placeholder='Runtime here'
+                               onFieldChange={this.handleFieldChange} fieldName='runtime'/>
                 </div>
-                <div className='form-footer'>
-                    <button key='reset' className='border-button' onClick={this.handleResetClick}>RESET</button>
+
+                <div className='movie-form-footer'>
+                    <BorderButton onClick={this.handleResetClick}>RESET</BorderButton>
                     <RedButton key='submit' onClick={() => this.props.onSubmit(this.state)}>SUBMIT</RedButton>
                 </div>
             </>

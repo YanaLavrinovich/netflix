@@ -4,8 +4,7 @@ import {MovieCard} from '../MovieCard/MovieCard.js';
 import PropTypes from 'prop-types';
 import {Label} from '../Label/Label';
 
-export const MovieList = props => {
-    const {movies, onMovieDelete, onMovieEdit} = props
+export function MovieList({movies, onMovieDelete, onMovieEdit}) {
     return (
         <>
             <Label><b>{movies ? movies.length : 0}</b> movies found</Label>

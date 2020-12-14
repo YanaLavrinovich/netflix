@@ -1,10 +1,9 @@
 import React from 'react';
 import {Popup} from '../Popup/Popup.js';
-import './styles.css'
 import {MovieForm} from '../MovieForm/MovieForm';
+import PropTypes from 'prop-types';
 
 export function EditMoviePopup({movie, onClose, onSubmit}) {
-    console.log(movie)
     return (
         <Popup
             title='EDIT MOVIE'
@@ -13,4 +12,10 @@ export function EditMoviePopup({movie, onClose, onSubmit}) {
             <MovieForm movie={movie} onSubmit={onSubmit}/>
         </Popup>
     )
+}
+
+EditMoviePopup.propTypes = {
+    movie: PropTypes.object,
+    onClose: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired
 }
