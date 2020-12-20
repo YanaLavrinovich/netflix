@@ -1,0 +1,8 @@
+.magnifier-button {
+  background: url('./magnifier.ico') no-repeat;
+  cursor: pointer;
+  background-size: contain;
+  height: 40px;
+  width: 40px;
+  border: none;
+}

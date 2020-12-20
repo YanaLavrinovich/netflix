@@ -7,9 +7,14 @@ export function GenreFilter({genres, selectedGenre, onGenreFilterChange}) {
     return (
         <div className='genre-filter'>
             {
-                genres && genres.map(genre => {
-                    return <GenreButton key={genre.id} isActive={genre.id === selectedGenre}
-                                        onClick={() => onGenreFilterChange(genre.id)}>{genre.name}</GenreButton>
+                genres?.map(genre => {
+                    return <GenreButton
+                                key={genre.id}
+                                isActive={genre.id === selectedGenre}
+                                onClick={() => onGenreFilterChange(genre.id)}
+                            >
+                                {genre.name}
+                            </GenreButton>
                 })
             }
         </div>

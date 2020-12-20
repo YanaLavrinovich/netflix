@@ -1,7 +1,7 @@
 import React from 'react';
-import {Popup} from '../Popup/Popup.js';
+import {Popup} from '../Popup/Popup';
 import './styles.css'
-import {RedButton} from "../RedButton/RedButton";
+import {RedButton} from '../RedButton/RedButton';
 import PropTypes from 'prop-types';
 
 export function DeleteMoviePopup({onClose, onConfirm}) {

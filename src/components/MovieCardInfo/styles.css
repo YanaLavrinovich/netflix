@@ -1,23 +1,23 @@
 .movie-card-info {
-    color: #ffffff;
+  color: #fff;
 }
 
 .movie-card-info-year {
-    border: #ffffff solid 1px;
-    padding: 5px 10px;
-    border-radius: 6px;
+  border: #fff solid 1px;
+  padding: 5px 10px;
+  border-radius: 6px;
 }
 
-.movie-card-info-name{
-    margin-bottom: 10px;
+.movie-card-info-name {
+  margin-bottom: 10px;
 }
 
 .movie-card-info-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .movie-card-info-description {
-    margin-top: 0;
+  margin-top: 0;
 }

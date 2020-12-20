@@ -1,6 +1,6 @@
 import React from 'react';
-import {MovieFilter} from '../MovieFilter/MovieFilter.js';
-import {MovieList} from '../MovieList/MovieList.js';
+import {MovieFilter} from '../MovieFilter/MovieFilter';
+import {MovieList} from '../MovieList/MovieList';
 import './styles.css';
 import PropTypes from 'prop-types';
 
@@ -13,7 +13,8 @@ export const MovieContainer = ({
                                    onSortChange,
                                    onGenreFilterChange,
                                    onMovieDelete,
-                                   onMovieEdit
+                                   onMovieEdit,
+                                   onMovieClick
                                }) => {
     return (
         <div className='movie-container'>
@@ -25,7 +26,12 @@ export const MovieContainer = ({
                 onGenreFilterChange={onGenreFilterChange}
                 onSortChange={onSortChange}
             />
-            <MovieList movies={movies} onMovieDelete={onMovieDelete} onMovieEdit={onMovieEdit}/>
+            <MovieList
+                movies={movies}
+                onMovieDelete={onMovieDelete}
+                onMovieEdit={onMovieEdit}
+                onMovieClick={onMovieClick}
+            />
         </div>
     )
 }
@@ -40,4 +46,5 @@ MovieContainer.propTypes = {
     onGenreFilterChange: PropTypes.func,
     onMovieDelete: PropTypes.func,
     onMovieEdit: PropTypes.func,
+    onMovieClick: PropTypes.func
 }

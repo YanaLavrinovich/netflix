@@ -8,7 +8,11 @@ export function SortFilter({sortOptions, selectedSort, onSortChange}) {
     return (
         <div className='sort-filter'>
             <ShadowLabel>SORT BY</ShadowLabel>
-            <Select options={sortOptions} selected={selectedSort} onChangeValue={onSortChange}/>
+            <Select
+                options={sortOptions}
+                selected={selectedSort}
+                onChangeValue={onSortChange}
+            />
         </div>
     )
 }

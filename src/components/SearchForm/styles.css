@@ -1,8 +1,8 @@
 .search-form {
-    padding-right: 100px;
+  padding-right: 100px;
 }
 
 .search-form-row {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }

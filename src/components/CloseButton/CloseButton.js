@@ -4,7 +4,7 @@ import './styles.css'
 
 export function CloseButton({onClick}) {
     return (
-        <button type="button" className="close" onClick={onClick}>
+        <button className='close' onClick={onClick}>
             <span>×</span>
         </button>
     )

@@ -1,8 +1,8 @@
 body {
   margin: 0;
   font-family: 'Trebuchet MS', BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -17,5 +17,16 @@ h1 {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
+}
+
+#root {
+  overflow: hidden;
+}
+
+#modal-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
 }

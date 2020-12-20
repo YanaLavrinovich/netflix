@@ -8,8 +8,16 @@ export const MovieFilter = props => {
     const {genres, selectedGenre, sortOptions, selectedSort, onSortChange, onGenreFilterChange} = props
     return (
         <div className='movie-filter'>
-            <GenreFilter genres={genres} selectedGenre={selectedGenre} onGenreFilterChange={onGenreFilterChange}/>
-            <SortFilter sortOptions={sortOptions} selectedSort={selectedSort} onSortChange={onSortChange}/>
+            <GenreFilter
+                genres={genres}
+                selectedGenre={selectedGenre}
+                onGenreFilterChange={onGenreFilterChange}
+            />
+            <SortFilter
+                sortOptions={sortOptions}
+                selectedSort={selectedSort}
+                onSortChange={onSortChange}
+            />
         </div>
     )
 }

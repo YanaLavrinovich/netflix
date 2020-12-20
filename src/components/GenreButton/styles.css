@@ -1,11 +1,12 @@
 .genre-button {
-    color: #ffffff;
-    background: none;
-    padding: 0;
-    margin-right: 20px;
+  color: #fff;
+  background: none;
+  padding: 0;
+  margin-right: 20px;
 }
 
-.genre-button:hover,.active {
-    border-bottom: #f65261 solid 2px;
-    border-radius: 0;
+.genre-button:hover,
+.active {
+  border-bottom: #f65261 solid 2px;
+  border-radius: 0;
 }

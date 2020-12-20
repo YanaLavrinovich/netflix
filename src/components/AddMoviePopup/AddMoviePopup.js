@@ -1,5 +1,5 @@
 import React from 'react';
-import {Popup} from '../Popup/Popup.js';
+import {Popup} from '../Popup/Popup';
 import {MovieForm} from '../MovieForm/MovieForm';
 import PropTypes from 'prop-types';
 
@@ -9,7 +9,7 @@ export function AddMoviePopup({onClose, onSubmit}) {
             title='ADD MOVIE'
             onClose={onClose}
         >
-            <MovieForm onSubmit={onSubmit}/>
+            <MovieForm onSubmit={onSubmit} okLabel='SUBMIT'/>
         </Popup>
     )
 }

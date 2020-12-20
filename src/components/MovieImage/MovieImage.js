@@ -1,24 +1,33 @@
 import React from 'react';
 import './styles.css'
 import PropTypes from 'prop-types';
-import {CarouselButton} from "../CarouselButton/CarouselButton";
+import {CarouselButton} from '../CarouselButton/CarouselButton';
 
-export function MovieImage({image, showActions, onDotsClick, onDeleteClick, onEditClick}) {
+export function MovieImage({
+                               image,
+                               onDeleteClick,
+                               onEditClick,
+                               onMovieClick
+                           }) {
+    const imageClassName = {
+        backgroundImage: `url(${image})`,
+    }
     return (
         <div className='movie-card-image-container'>
-            <img className='movie-card-img' src={image} alt='MovieLogo'/>
+            <div className='movie-card-img' style={imageClassName} onClick={onMovieClick}/>
             <div className='movie-card-actions-container'>
-                <CarouselButton showActions={showActions} onDotsClick={onDotsClick} onDeleteClick={onDeleteClick}
-                                onEditClick={onEditClick}/>
+                <CarouselButton
+                    onDeleteClick={onDeleteClick}
+                    onEditClick={onEditClick}
+                />
             </div>
         </div>
     )
 }
 
 MovieImage.propTypes = {
-    showActions: PropTypes.bool,
     image: PropTypes.string,
     onDeleteClick: PropTypes.func,
     onEditClick: PropTypes.func,
-    onDotsClick: PropTypes.func
+    onMovieClick: PropTypes.func
 }

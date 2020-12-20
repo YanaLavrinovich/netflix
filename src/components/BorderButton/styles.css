@@ -1,9 +1,9 @@
 .border-button {
-    color: #f65261;
-    background-color: transparent;
-    padding: 20px 70px 20px 70px;
-    border-radius: 6px;
-    height: 65px;
-    font-size: larger;
-    border: 1px solid #f65261;
+  color: #f65261;
+  background-color: transparent;
+  padding: 20px 70px 20px 70px;
+  border-radius: 6px;
+  height: 65px;
+  font-size: larger;
+  border: 1px solid #f65261;
 }

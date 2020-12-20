@@ -1,8 +1,8 @@
 .button {
-    height: 50px;
-    border-radius: 6px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border: none;
-    font-size: larger;
+  height: 50px;
+  border-radius: 6px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: none;
+  font-size: larger;
 }

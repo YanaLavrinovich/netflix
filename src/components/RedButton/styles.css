@@ -1,9 +1,9 @@
 .red-button {
-    color: #ffffff;
-    background-color: #f65261;
-    padding: 20px 70px 20px 70px;
-    border-radius: 6px;
-    height: 65px;
-    font-size: larger;
-    border: none;
+  color: #fff;
+  background-color: #f65261;
+  padding: 20px 70px 20px 70px;
+  border-radius: 6px;
+  height: 65px;
+  font-size: larger;
+  border: none;
 }

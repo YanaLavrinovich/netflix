@@ -4,27 +4,18 @@ import './styles.css'
 import {MovieImage} from '../MovieImage/MovieImage';
 import {MovieCardInfo} from '../MovieCardInfo/MovieCardInfo';
 
-export class MovieCard extends React.PureComponent {
-    state = {
-        showActions: false
-    }
-
-    handleDotsClick = () => {
-        this.setState({showActions: !this.state.showActions})
-    }
-
-    render() {
-        const {movie, onMovieDelete, onMovieEdit} = this.props
-        return (
-            <div className='movie-card'>
-                <MovieImage showActions={this.state.showActions} image={movie.image} onDotsClick={this.handleDotsClick}
-                            onDeleteClick={() => onMovieDelete(movie.id)} onEditClick={() => onMovieEdit(movie.id)}/>
-                <MovieCardInfo movie={movie}/>
-            </div>
-        )
-    }
-
-
+export function MovieCard({movie, onMovieDelete, onMovieEdit, onMovieClick}) {
+    return (
+        <div className='movie-card'>
+            <MovieImage
+                image={movie.image}
+                onDeleteClick={() => onMovieDelete(movie.id)}
+                onEditClick={() => onMovieEdit(movie.id)}
+                onMovieClick={() => onMovieClick(movie.id)}
+            />
+            <MovieCardInfo movie={movie}/>
+        </div>
+    )
 }
 
 MovieCard.propTypes = {
@@ -36,5 +27,6 @@ MovieCard.propTypes = {
         year: PropTypes.string.isRequired
     }).isRequired,
     onMovieDelete: PropTypes.func,
-    onMovieEdit: PropTypes.func
+    onMovieEdit: PropTypes.func,
+    onMovieClick: PropTypes.func
 }

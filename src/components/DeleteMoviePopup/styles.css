@@ -1,16 +1,16 @@
 .delete-movie-popup-confirm-message {
-    color: #ffffff;
-    padding-left: 60px;
+  color: #fff;
+  padding-left: 60px;
 }
 
 .delete-movie-popup-footer {
-    width: 92%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-bottom: 50px;
+  width: 92%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 50px;
 }
 
 .delete-movie-popup-footer button {
-    margin-left: 15px;
+  margin-left: 15px;
 }

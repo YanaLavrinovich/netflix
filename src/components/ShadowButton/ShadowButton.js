@@ -5,7 +5,12 @@ import PropTypes from 'prop-types';
 
 export function ShadowButton({children, onClick}) {
     return (
-        <Button className='shadow-button' onClick={onClick}>{children}</Button>
+        <Button
+            className='shadow-button'
+            onClick={onClick}
+        >
+            {children}
+        </Button>
     )
 }
 

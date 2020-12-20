@@ -4,7 +4,13 @@ import './styles.css'
 
 export function BorderButton({children, onClick}) {
     return (
-        <button key='reset' className='border-button' onClick={onClick}>{children}</button>
+        <button
+            key='reset'
+            className='border-button'
+            onClick={onClick}
+        >
+            {children}
+        </button>
     )
 }
 
