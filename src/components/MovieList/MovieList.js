@@ -3,11 +3,12 @@ import './styles.css';
 import {MovieCard} from '../MovieCard/MovieCard';
 import PropTypes from 'prop-types';
 import {Label} from '../Label/Label';
+import {MOVIES_FOUND} from "./constants";
 
 export function MovieList({movies, onMovieDelete, onMovieEdit, onMovieClick}) {
     return (
         <>
-            <Label><b>{movies ? movies.length : 0}</b> movies found</Label>
+            <Label><b>{movies ? movies.length : 0}</b> {MOVIES_FOUND}</Label>
             <div className='movie-list'>
                 {
                     movies?.map(movie => {

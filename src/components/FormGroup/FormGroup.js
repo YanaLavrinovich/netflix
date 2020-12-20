@@ -12,7 +12,7 @@ export function FormGroup({type, fieldName, placeholder, label, value, onFieldCh
                 placeholder={placeholder}
                 name={fieldName}
                 value={value}
-                onChange={(e) => onFieldChange(fieldName, e.target.value)}
+                onChange={(e) => onFieldChange(e.target.value)}
             />
         </div>
     )

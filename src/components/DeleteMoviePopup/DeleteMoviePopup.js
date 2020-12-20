@@ -3,16 +3,17 @@ import {Popup} from '../Popup/Popup';
 import './styles.css'
 import {RedButton} from '../RedButton/RedButton';
 import PropTypes from 'prop-types';
+import {CONFIRM, DELETE_CONFIRM_MESSAGE, DELETE_MOVIE} from "./constants";
 
 export function DeleteMoviePopup({onClose, onConfirm}) {
     return (
         <Popup
-            title='DELETE MOVIE'
+            title={DELETE_MOVIE}
             onClose={onClose}>
-            <div><h2 className='delete-movie-popup-confirm-message'>Are you sure you want to delete this movie?</h2>
+            <div><h2 className='delete-movie-popup-confirm-message'>{DELETE_CONFIRM_MESSAGE}</h2>
             </div>
             <div className='delete-movie-popup-footer'>
-                <RedButton key='confirm' onClick={onConfirm}>CONFIRM</RedButton>
+                <RedButton key='confirm' onClick={onConfirm}>{CONFIRM}</RedButton>
             </div>
         </Popup>
     )

@@ -1,14 +1,15 @@
 import React from 'react';
 import './styles.css';
+import {ERROR_MESSAGE} from "./constants";
 
 export class ErrorBoundary extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { hasError: false };
+        this.state = {hasError: false};
     }
 
     static getDerivedStateFromError(error) {
-        return { hasError: true };
+        return {hasError: true};
     }
 
     componentDidCatch(error, errorInfo) {
@@ -19,7 +20,7 @@ export class ErrorBoundary extends React.Component {
         if (this.state.hasError) {
             return (
                 <div className='error-container'>
-                    <h1 className='error-title'>Something went wrong.</h1>
+                    <h1 className='error-title'>{ERROR_MESSAGE}</h1>
                 </div>
 
             )

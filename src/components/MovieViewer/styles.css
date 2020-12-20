@@ -17,7 +17,12 @@
 }
 
 .movie-image {
-    height: 650px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
+    background-size: 100% 630px;
+    background-repeat: no-repeat;
+    background-color: lightsteelblue;
+    height: 630px;
+    width: 450px;
 }
 
 .movie-rating {

@@ -3,11 +3,12 @@ import './styles.css';
 import PropTypes from 'prop-types';
 import {Select} from '../Select/Select';
 import {ShadowLabel} from '../ShadowLabel/ShadowLabel';
+import {SORT_BY} from "./constants";
 
 export function SortFilter({sortOptions, selectedSort, onSortChange}) {
     return (
         <div className='sort-filter'>
-            <ShadowLabel>SORT BY</ShadowLabel>
+            <ShadowLabel>{SORT_BY}</ShadowLabel>
             <Select
                 options={sortOptions}
                 selected={selectedSort}

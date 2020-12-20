@@ -3,7 +3,7 @@ export const moviesFromAPI = [
         id: 1,
         title: 'Pulp Fiction',
         description: 'Action & Adventure',
-        image: 'https://assets.nflxext.com/us/boxshots/hd1080/880640.jpg',
+        movieUrl: 'https://assets.nflxext.com/us/boxshots/hd1080/880640.jpg',
         genre: 'CRIME',
         rating: 8.9,
         runtime: '154',
@@ -14,7 +14,7 @@ export const moviesFromAPI = [
         id: 2,
         title: 'Bohemian Rhapsody',
         description: 'Drama, Biography, Music',
-        image: 'https://tvguide1.cbsistatic.com/feed/1/957/thumbs/118587957_1300x1733.jpg',
+        movieUrl: 'https://tvguide1.cbsistatic.com/feed/1/957/thumbs/118587957_1300x1733.jpg',
         genre: 'DOCUMENTARY',
         rating: 8.0,
         runtime: '144',
@@ -25,7 +25,7 @@ export const moviesFromAPI = [
         id: 3,
         title: 'Kill Bill: Vol 2',
         description: 'Oscar winning Movie',
-        image: 'https://occ-0-1009-1001.1.nflxso.net/dnm/api/v6/XsrytRUxks8BtTRf9HNlZkW2tvY/AAAABdi5796UaXZuyYxzb4S3pGZ--SpwfZfoVcVOip6R3JSgv-RkAhDQFQDn6fVpCZz9ZIT70U1EYpvHp-9jzHm7sgyeg_OOd1Bh3Q.jpg',
+        movieUrl: 'https://occ-0-1009-1001.1.nflxso.net/dnm/api/v6/XsrytRUxks8BtTRf9HNlZkW2tvY/AAAABdi5796UaXZuyYxzb4S3pGZ--SpwfZfoVcVOip6R3JSgv-RkAhDQFQDn6fVpCZz9ZIT70U1EYpvHp-9jzHm7sgyeg_OOd1Bh3Q.jpg',
         genre: 'CRIME',
         rating: 8.0,
         runtime: '130',
@@ -36,7 +36,7 @@ export const moviesFromAPI = [
         id: 4,
         title: 'Avengers: War of Infinity',
         description: 'Action & Adventure',
-        image: 'https://assets.nflxext.com/us/boxshots/hd1080/80219127.jpg',
+        movieUrl: 'https://assets.nflxext.com/us/boxshots/hd1080/80219127.jpg',
         genre: 'COMEDY',
         rating: 8.4,
         runtime: '180',
@@ -47,7 +47,7 @@ export const moviesFromAPI = [
         id: 5,
         title: 'Inception',
         description: 'Action & Adventure',
-        image: 'https://assets.nflxext.com/us/boxshots/hd1080/70131314.jpg',
+        movieUrl: 'https://assets.nflxext.com/us/boxshots/hd1080/70131314.jpg',
         genre: 'HORROR',
         rating: 8.8,
         runtime: '190',
@@ -58,7 +58,7 @@ export const moviesFromAPI = [
         id: 6,
         title: 'Reservoir dogs',
         description: 'Oscar winning Movie',
-        image: 'https://assets.nflxext.com/us/boxshots/hd1080/902003.jpg',
+        movieUrl: 'https://assets.nflxext.com/us/boxshots/hd1080/902003.jpg',
         genre: 'HORROR',
         rating: 8.3,
         runtime: '200',
@@ -104,3 +104,15 @@ export const sortOptions = [
         name: 'RATING'
     }
 ]
+
+export const GENRE_ALL = 'all'
+export const YEAR_SORT = 'year'
+
+export const POPUP_TYPE = {
+    ADD: 'add',
+    EDIT: 'edit',
+    DELETE: 'delete'
+}
+
+export const NETFLIX = 'netflix'
+export const ROULETTE = 'roulette'

@@ -8,7 +8,7 @@ export function Select({options, selected, onChangeValue}) {
         <select
             className='sort-select'
             value={selected}
-            onChange={onChangeValue}
+            onChange={(e) => onChangeValue(e.target.value)}
         >
             {
                 options?.map(option => {

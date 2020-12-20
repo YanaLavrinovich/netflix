@@ -3,40 +3,40 @@ import {Header} from '../../components/Header/Header';
 import {MovieContainer} from '../../components/MovieContainer/MovieContainer';
 import {Footer} from '../../components/Footer/Footer';
 import {FooterLogo} from '../../components/FooterLogo/FooterLogo';
-import {genres, moviesFromAPI, sortOptions} from './MovieConstants';
-import React, {useCallback, useEffect, useState} from 'react';
+import {
+    GENRE_ALL,
+    genres,
+    moviesFromAPI,
+    NETFLIX,
+    POPUP_TYPE,
+    ROULETTE,
+    sortOptions,
+    YEAR_SORT
+} from './MovieConstants';
+import React, {useCallback, useState} from 'react';
 import {AddMoviePopup} from '../../components/AddMoviePopup/AddMoviePopup';
 import {DeleteMoviePopup} from '../../components/DeleteMoviePopup/DeleteMoviePopup';
 import {EditMoviePopup} from '../../components/EditMoviePopup/EditMoviePopup';
-import {getRandomIntInclusive, sortByField} from './MovieListUtil';
+import {getRandomIntInclusive} from './MovieListUtil';
+import {useFilteredMovies} from '../../hooks/useFilteredMovies';
 
 
 export function MovieListPage() {
     const [visiblePopupName, setVisiblePopupName] = useState(''),
-        [selectedGenre, setSelectedGenre] = useState('all'),
-        [selectedSort, setSelectedSort] = useState('year'),
+        [selectedGenre, setSelectedGenre] = useState(GENRE_ALL),
+        [selectedSort, setSelectedSort] = useState(YEAR_SORT),
         [movies, setMovies] = useState(moviesFromAPI),
-        [filteredMovies, setFilteredMovies] = useState([]),
         [currentMovieId, setCurrentMovieId] = useState(''),
         [viewedMovie, setViewedMovie] = useState({})
 
-    useEffect(() => {
-        const filterType = genres.find(filter => filter.id === selectedGenre)?.name
-        let newFilteredMovies = [...movies]
-        if (filterType !== 'ALL') {
-            newFilteredMovies = newFilteredMovies.filter(movie => movie.genre === filterType)
-        }
-        setFilteredMovies(sortByField(newFilteredMovies, selectedSort))
-    }, [movies, selectedGenre, selectedSort])
-
     const handleOnDeleteClick = useCallback((id) => {
         setCurrentMovieId(id)
-        setVisiblePopupName('delete')
+        setVisiblePopupName(POPUP_TYPE.DELETE)
     }, [])
 
     const handleOnEditClick = useCallback((id) => {
         setCurrentMovieId(id)
-        setVisiblePopupName('edit')
+        setVisiblePopupName(POPUP_TYPE.EDIT)
     }, [])
 
     const handleMovieClick = useCallback((movieId) => {
@@ -55,27 +55,33 @@ export function MovieListPage() {
         const index = editedMovies.findIndex(m => m.id === movie.id)
         setMovies([...editedMovies.slice(0, index), movie, ...editedMovies.slice(index + 1, editedMovies.length)])
         setVisiblePopupName('')
-    }, [movies])
+
+        if (viewedMovie?.id === movie.id) {
+            setViewedMovie({})
+            setViewedMovie(movie)
+        }
+    }, [viewedMovie, movies])
 
     const handleMovieDelete = useCallback(() => {
         const editedMovies = movies
         const index = editedMovies.findIndex(m => m.id === currentMovieId)
         setMovies([...editedMovies.slice(0, index), ...editedMovies.slice(index + 1, editedMovies.length)])
         setVisiblePopupName('')
-    }, [currentMovieId, movies])
+        setViewedMovie(viewedMovie?.id !== currentMovieId ? viewedMovie : {})
+    }, [currentMovieId, movies, viewedMovie])
 
     return (
         <>
             <ErrorBoundary>
                 <Header
                     viewedMovie={viewedMovie}
-                    onAddMovieClick={() => setVisiblePopupName('add')}
+                    onAddMovieClick={() => setVisiblePopupName(POPUP_TYPE.ADD)}
                     onMagnifierClick={() => setViewedMovie({})}
                 />
                 <MovieContainer
                     genres={genres}
                     selectedGenre={selectedGenre}
-                    movies={filteredMovies}
+                    movies={useFilteredMovies({movies, selectedGenre, selectedSort})}
                     sortOptions={sortOptions}
                     selectedSort={selectedSort}
                     onGenreFilterChange={setSelectedGenre}
@@ -84,18 +90,18 @@ export function MovieListPage() {
                     onMovieEdit={handleOnEditClick}
                     onMovieClick={handleMovieClick}
                 />
-                {visiblePopupName === 'add' &&
+                {visiblePopupName === POPUP_TYPE.ADD &&
                 <AddMoviePopup
                     onSubmit={handleSubmitMovie}
                     onClose={() => setVisiblePopupName('')}/>
                 }
-                {visiblePopupName === 'edit' &&
+                {visiblePopupName === POPUP_TYPE.EDIT &&
                 <EditMoviePopup
                     movie={movies.find(movie => movie.id === currentMovieId)}
                     onSubmit={handleMovieEditSave}
                     onClose={() => setVisiblePopupName('')}/>
                 }
-                {visiblePopupName === 'delete' &&
+                {visiblePopupName === POPUP_TYPE.DELETE &&
                 <DeleteMoviePopup
                     onConfirm={handleMovieDelete}
                     onClose={() => setVisiblePopupName('')}/>
@@ -103,7 +109,7 @@ export function MovieListPage() {
             </ErrorBoundary>
             <Footer>
                 <FooterLogo>
-                    <b>netflix</b>roulette
+                    <b>{NETFLIX}</b>{ROULETTE}
                 </FooterLogo>
             </Footer>
         </>

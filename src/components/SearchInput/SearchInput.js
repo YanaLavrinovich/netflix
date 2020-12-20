@@ -1,11 +1,12 @@
 import React from 'react';
 import './styles.css'
+import {SEARCH_INPUT_PLACEHOLDER} from "./constants";
 
 export function SearchInput() {
     return (
         <input
             className='search-input'
-            placeholder='What do you want to watch?'
+            placeholder={SEARCH_INPUT_PLACEHOLDER}
             name='search'
         />
     )
