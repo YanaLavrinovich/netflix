@@ -1,4 +1,4 @@
-import {genres} from '../layouts/MovieListPage/MovieConstants';
+import {GENRE_ALL, genres} from '../layouts/MovieListPage/MovieConstants';
 import {sortByField} from '../layouts/MovieListPage/MovieListUtil';
 import {useEffect, useState} from 'react';
 
@@ -8,7 +8,7 @@ export function useFilteredMovies({movies, selectedGenre, selectedSort}) {
     useEffect(() => {
         const filterType = genres.find(filter => filter.id === selectedGenre)?.name
         let newFilteredMovies = [...movies]
-        if (filterType !== 'ALL') {
+        if (selectedGenre !== GENRE_ALL) {
             newFilteredMovies = newFilteredMovies.filter(movie => movie.genre === filterType)
         }
         setFilteredMovies(sortByField(newFilteredMovies, selectedSort))
