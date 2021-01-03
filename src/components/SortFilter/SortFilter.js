@@ -3,7 +3,7 @@ import './styles.css';
 import PropTypes from 'prop-types';
 import {Select} from '../Select/Select';
 import {ShadowLabel} from '../ShadowLabel/ShadowLabel';
-import {SORT_BY} from "./constants";
+import {SORT_BY} from './constants';
 
 export function SortFilter({sortOptions, selectedSort, onSortChange}) {
     return (

@@ -7,7 +7,7 @@ import {NavBar} from '../NavBar/NavBar';
 import PropTypes from 'prop-types';
 import {MagnifierButton} from '../MagnifierButton/MagnifierButton';
 import {MovieViewer} from '../MovieViewer/MovieViewer';
-import {NETFLIX, PLUS_ADD_MOVIE, ROULETTE} from "./constants";
+import {NETFLIX, PLUS_ADD_MOVIE, ROULETTE} from './constants';
 
 export const Header = ({viewedMovie, onAddMovieClick, onMagnifierClick}) => {
     return (

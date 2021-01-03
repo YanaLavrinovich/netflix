@@ -1,5 +1,5 @@
 import React from 'react';
-import {SearchTitle} from '../SearchTitle/SearchTitle';
+import {Title} from '../Title/Title';
 import {SearchInput} from '../SearchInput/SearchInput';
 import {RedButton} from '../RedButton/RedButton';
 import './styles.css';
@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 export function SearchForm({title, searchLabel}) {
     return (
         <form className='search-form'>
-            <SearchTitle>{title}</SearchTitle>
+            <Title>{title}</Title>
             <div className='search-form-row'>
                 <SearchInput/>
                 <RedButton>{searchLabel}</RedButton>

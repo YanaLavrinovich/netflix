@@ -3,72 +3,42 @@ import {Header} from '../../components/Header/Header';
 import {MovieContainer} from '../../components/MovieContainer/MovieContainer';
 import {Footer} from '../../components/Footer/Footer';
 import {FooterLogo} from '../../components/FooterLogo/FooterLogo';
-import {
-    GENRE_ALL,
-    genres,
-    moviesFromAPI,
-    NETFLIX,
-    POPUP_TYPE,
-    ROULETTE,
-    sortOptions,
-    YEAR_SORT
-} from './MovieConstants';
-import React, {useCallback, useState} from 'react';
-import {AddMoviePopup} from '../../components/AddMoviePopup/AddMoviePopup';
-import {DeleteMoviePopup} from '../../components/DeleteMoviePopup/DeleteMoviePopup';
-import {EditMoviePopup} from '../../components/EditMoviePopup/EditMoviePopup';
-import {getRandomIntInclusive} from './MovieListUtil';
-import {useFilteredMovies} from '../../hooks/useFilteredMovies';
+import {DATE_SORT, GENRE_ALL, NETFLIX, ROULETTE, sortOptions} from './MovieConstants';
+import React, {useCallback, useEffect, useState} from 'react';
+import {connect} from 'react-redux';
+import {fetchMoviesAction, setViewedMovieAction} from '../../redux/actions/movies';
+import {setVisiblePopupNameAction} from '../../redux/actions/popups';
+import MoviePopupContainer from '../MoviePopupContainer/MoviePopupContainer';
+import {POPUP_TYPE} from '../MoviePopupContainer/constants';
 
-
-export function MovieListPage() {
-    const [visiblePopupName, setVisiblePopupName] = useState(''),
+function MovieListPage(props) {
+    const [currentMovieId, setCurrentMovieId] = useState(''),
         [selectedGenre, setSelectedGenre] = useState(GENRE_ALL),
-        [selectedSort, setSelectedSort] = useState(YEAR_SORT),
-        [movies, setMovies] = useState(moviesFromAPI),
-        [currentMovieId, setCurrentMovieId] = useState(''),
-        [viewedMovie, setViewedMovie] = useState({})
+        [selectedSort, setSelectedSort] = useState(DATE_SORT)
 
-    const handleOnDeleteClick = useCallback((id) => {
-        setCurrentMovieId(id)
-        setVisiblePopupName(POPUP_TYPE.DELETE)
-    }, [])
+    const {moviesData, fetchMovies, setVisiblePopupName, setViewedMovie} = props
+    const {movies, viewedMovie, isLoading, isNeedUpdateMovies} = moviesData
 
-    const handleOnEditClick = useCallback((id) => {
-        setCurrentMovieId(id)
-        setVisiblePopupName(POPUP_TYPE.EDIT)
-    }, [])
+    useEffect(() => {
+        if (!!isNeedUpdateMovies) {
+            fetchMovies(selectedGenre, selectedSort)
+        }
+    }, [isNeedUpdateMovies, selectedGenre, selectedSort, fetchMovies])
+
+    useEffect(() => {
+        fetchMovies(selectedGenre, selectedSort)
+    }, [selectedGenre, selectedSort, fetchMovies])
+
 
     const handleMovieClick = useCallback((movieId) => {
         const movie = movies.find(m => m.id === movieId)
         setViewedMovie(movie)
-    }, [movies])
+    }, [movies, setViewedMovie])
 
-    const handleSubmitMovie = useCallback((movie) => {
-        movie.id = getRandomIntInclusive(1, 1000000)
-        setMovies([...movies, movie])
-        setVisiblePopupName('')
-    }, [movies])
-
-    const handleMovieEditSave = useCallback((movie) => {
-        const editedMovies = movies
-        const index = editedMovies.findIndex(m => m.id === movie.id)
-        setMovies([...editedMovies.slice(0, index), movie, ...editedMovies.slice(index + 1, editedMovies.length)])
-        setVisiblePopupName('')
-
-        if (viewedMovie?.id === movie.id) {
-            setViewedMovie({})
-            setViewedMovie(movie)
-        }
-    }, [viewedMovie, movies])
-
-    const handleMovieDelete = useCallback(() => {
-        const editedMovies = movies
-        const index = editedMovies.findIndex(m => m.id === currentMovieId)
-        setMovies([...editedMovies.slice(0, index), ...editedMovies.slice(index + 1, editedMovies.length)])
-        setVisiblePopupName('')
-        setViewedMovie(viewedMovie?.id !== currentMovieId ? viewedMovie : {})
-    }, [currentMovieId, movies, viewedMovie])
+    const handlePopupOpen = useCallback((popupName) => (id) => {
+        setCurrentMovieId(id)
+        setVisiblePopupName(popupName)
+    }, [setVisiblePopupName])
 
     return (
         <>
@@ -76,36 +46,23 @@ export function MovieListPage() {
                 <Header
                     viewedMovie={viewedMovie}
                     onAddMovieClick={() => setVisiblePopupName(POPUP_TYPE.ADD)}
-                    onMagnifierClick={() => setViewedMovie({})}
+                    onMagnifierClick={() => setViewedMovie(null)}
                 />
                 <MovieContainer
-                    genres={genres}
+                    isLoading={isLoading}
                     selectedGenre={selectedGenre}
-                    movies={useFilteredMovies({movies, selectedGenre, selectedSort})}
+                    movies={movies}
                     sortOptions={sortOptions}
                     selectedSort={selectedSort}
                     onGenreFilterChange={setSelectedGenre}
                     onSortChange={setSelectedSort}
-                    onMovieDelete={handleOnDeleteClick}
-                    onMovieEdit={handleOnEditClick}
+                    onMovieDelete={handlePopupOpen(POPUP_TYPE.DELETE)}
+                    onMovieEdit={handlePopupOpen(POPUP_TYPE.EDIT)}
                     onMovieClick={handleMovieClick}
                 />
-                {visiblePopupName === POPUP_TYPE.ADD &&
-                <AddMoviePopup
-                    onSubmit={handleSubmitMovie}
-                    onClose={() => setVisiblePopupName('')}/>
-                }
-                {visiblePopupName === POPUP_TYPE.EDIT &&
-                <EditMoviePopup
-                    movie={movies.find(movie => movie.id === currentMovieId)}
-                    onSubmit={handleMovieEditSave}
-                    onClose={() => setVisiblePopupName('')}/>
-                }
-                {visiblePopupName === POPUP_TYPE.DELETE &&
-                <DeleteMoviePopup
-                    onConfirm={handleMovieDelete}
-                    onClose={() => setVisiblePopupName('')}/>
-                }
+                <MoviePopupContainer
+                    currentMovieId={currentMovieId}
+                />
             </ErrorBoundary>
             <Footer>
                 <FooterLogo>
@@ -115,3 +72,15 @@ export function MovieListPage() {
         </>
     );
 }
+
+const mapStateToProps = state => ({
+    moviesData: state.movies
+})
+
+const mapDispatchToProps = dispatch => ({
+    fetchMovies: (selectedGenre, selectedSort) => dispatch(fetchMoviesAction(selectedGenre, selectedSort)),
+    setVisiblePopupName: (popupName) => dispatch(setVisiblePopupNameAction(popupName)),
+    setViewedMovie: (movieId) => dispatch(setViewedMovieAction(movieId))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieListPage)

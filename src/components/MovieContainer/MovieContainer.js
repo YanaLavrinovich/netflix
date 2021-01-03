@@ -5,7 +5,7 @@ import './styles.css';
 import PropTypes from 'prop-types';
 
 export const MovieContainer = ({
-                                   genres,
+                                   isLoading,
                                    selectedGenre,
                                    movies,
                                    sortOptions,
@@ -19,7 +19,6 @@ export const MovieContainer = ({
     return (
         <div className='movie-container'>
             <MovieFilter
-                genres={genres}
                 selectedGenre={selectedGenre}
                 sortOptions={sortOptions}
                 selectedSort={selectedSort}
@@ -27,6 +26,7 @@ export const MovieContainer = ({
                 onSortChange={onSortChange}
             />
             <MovieList
+                isLoading={isLoading}
                 movies={movies}
                 onMovieDelete={onMovieDelete}
                 onMovieEdit={onMovieEdit}
@@ -37,7 +37,7 @@ export const MovieContainer = ({
 }
 
 MovieContainer.propTypes = {
-    genres: PropTypes.array,
+    isLoading: PropTypes.bool,
     selectedGenre: PropTypes.string,
     movies: PropTypes.array,
     sortOptions: PropTypes.array,

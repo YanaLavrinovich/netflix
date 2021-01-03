@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles.css'
-import {SEARCH_INPUT_PLACEHOLDER} from "./constants";
+import {SEARCH_INPUT_PLACEHOLDER} from './constants';
 
 export function SearchInput() {
     return (

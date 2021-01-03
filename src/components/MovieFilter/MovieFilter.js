@@ -5,11 +5,10 @@ import PropTypes from 'prop-types';
 import './styles.css';
 
 export const MovieFilter = props => {
-    const {genres, selectedGenre, sortOptions, selectedSort, onSortChange, onGenreFilterChange} = props
+    const {selectedGenre, sortOptions, selectedSort, onSortChange, onGenreFilterChange} = props
     return (
         <div className='movie-filter'>
             <GenreFilter
-                genres={genres}
                 selectedGenre={selectedGenre}
                 onGenreFilterChange={onGenreFilterChange}
             />
@@ -23,7 +22,6 @@ export const MovieFilter = props => {
 }
 
 MovieFilter.propTypes = {
-    genres: PropTypes.array,
     sortOptions: PropTypes.array,
     selectedGenre: PropTypes.string,
     selectedSort: PropTypes.string,

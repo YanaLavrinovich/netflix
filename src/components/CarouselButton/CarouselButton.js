@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import './styles.css'
-import {DELETE, EDIT} from "./constants";
+import {DELETE, EDIT} from './constants';
 
 export function CarouselButton({onEditClick, onDeleteClick}) {
     const [showActions, toggleActions] = useState(false)
@@ -12,7 +12,6 @@ export function CarouselButton({onEditClick, onDeleteClick}) {
                 className='carousel-button-actions-open'
                 onClick={() => toggleActions(!showActions)}
             >
-                ...
             </button>
             : <div className='carousel-button-actions'>
                 <button

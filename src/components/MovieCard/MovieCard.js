@@ -8,7 +8,7 @@ export function MovieCard({movie, onMovieDelete, onMovieEdit, onMovieClick}) {
     return (
         <div className='movie-card'>
             <MovieImage
-                image={movie.movieUrl}
+                image={movie.poster_path}
                 onDeleteClick={() => onMovieDelete(movie.id)}
                 onEditClick={() => onMovieEdit(movie.id)}
                 onMovieClick={() => onMovieClick(movie.id)}
@@ -22,9 +22,9 @@ MovieCard.propTypes = {
     movie: PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
-        description: PropTypes.string,
-        movieUrl: PropTypes.string,
-        year: PropTypes.string.isRequired
+        tagline: PropTypes.string,
+        poster_path: PropTypes.string,
+        release_date: PropTypes.string.isRequired
     }).isRequired,
     onMovieDelete: PropTypes.func,
     onMovieEdit: PropTypes.func,

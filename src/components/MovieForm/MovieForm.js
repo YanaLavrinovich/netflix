@@ -12,89 +12,110 @@ import {
     RESET,
     RUNTIME_PLACEHOLDER,
     TITLE_PLACEHOLDER
-} from "./constants";
+} from './constants';
+import {FormDropdown} from '../FormDropdown/FormDropdown';
+import {genres} from '../../layouts/MovieListPage/MovieConstants';
+
+const movieDefault = {
+    title: '',
+    release_date: '',
+    poster_path: '',
+    genres: [],
+    overview: '',
+    runtime: ''
+}
 
 export function MovieForm({movie, okLabel, onSubmit}) {
-    const [title, setTitle] = useState(''),
-        [year, setYear] = useState(''),
-        [movieUrl, setMovieUrl] = useState(''),
-        [genre, setGenre] = useState(''),
-        [overview, setOverview] = useState(''),
-        [runtime, setRuntime] = useState('')
+    const [editMovie, setEditMovie] = useState(movieDefault)
 
     useEffect(() => {
         if (movie) {
-            setTitle(movie.title)
-            setYear(movie.year)
-            setMovieUrl(movie.movieUrl)
-            setGenre(movie.genre)
-            setOverview(movie.overview)
-            setRuntime(movie.runtime)
+            setEditMovie(movie)
         }
     }, [movie])
 
     const handleResetClick = useCallback(() => {
         if (movie) {
-            setTitle(movie.title)
-            setYear(movie.year)
-            setMovieUrl(movie.movieUrl)
-            setGenre(movie.genre)
-            setOverview(movie.overview)
-            setRuntime(movie.runtime)
+            setEditMovie(movie)
         } else {
-            setTitle('')
-            setYear('')
-            setMovieUrl('')
-            setGenre('')
-            setOverview('')
-            setRuntime('')
+            setEditMovie(movieDefault)
         }
     }, [movie])
+
+    const changeFieldValue = useCallback((field, value) => {
+        const newMovie = {...editMovie}
+        newMovie[field] = value
+        setEditMovie(newMovie)
+    }, [editMovie])
+
+    const changeFieldNumberValue = useCallback((field, value) => {
+        const newMovie = {...editMovie}
+        newMovie[field] = !Number.isNaN(value) ? Number.parseInt(value) : ''
+        setEditMovie(newMovie)
+    }, [editMovie])
+
+    const handleCheckboxChange = useCallback((e) => {
+        let newGenre = [...editMovie.genres]
+        if (e.target.checked) {
+            newGenre = [...newGenre, e.target.value]
+        } else {
+            newGenre = newGenre.filter(genre => genre !== e.target.value)
+        }
+        setEditMovie({...editMovie, genres: newGenre})
+    }, [editMovie])
 
     return (
         <>
             <div>
+                {!!movie &&
+                <FormGroup
+                    label='MOVIE ID'
+                    value={editMovie.id}
+                    isReadOnly={true}
+                />
+                }
                 <FormGroup
                     label='TITLE'
-                    value={title}
+                    value={editMovie.title}
                     placeholder={TITLE_PLACEHOLDER}
-                    onFieldChange={setTitle}
+                    onFieldChange={changeFieldValue}
                     fieldName='title'
                 />
                 <FormGroup
                     type='date'
                     label='RELEASE DATE'
-                    value={year}
+                    value={editMovie.release_date}
                     placeholder={DATE_PLACEHOLDER}
-                    onFieldChange={setYear}
-                    fieldName='year'
+                    onFieldChange={changeFieldValue}
+                    fieldName='release_date'
                 />
                 <FormGroup
                     label='MOVIE URL'
-                    value={movieUrl}
+                    value={editMovie.poster_path}
                     placeholder={MOVIE_URL_PLACEHOLDER}
-                    onFieldChange={setMovieUrl}
-                    fieldName='movieUrl'
+                    onFieldChange={changeFieldValue}
+                    fieldName='poster_path'
                 />
-                <FormGroup
+                <FormDropdown
                     label='GENRE'
-                    value={genre}
+                    value={editMovie.genres}
+                    options={genres}
                     placeholder={GENRE_PLACEHOLDER}
-                    onFieldChange={setGenre}
-                    fieldName='genre'
+                    onCheckboxChange={handleCheckboxChange}
+                    fieldName='genres'
                 />
                 <FormGroup
                     label='OVERVIEW'
-                    value={overview}
+                    value={editMovie.overview}
                     placeholder={OVERVIEW_PLACEHOLDER}
-                    onFieldChange={setOverview}
+                    onFieldChange={changeFieldValue}
                     fieldName='overview'
                 />
                 <FormGroup
                     label='RUNTIME'
-                    value={runtime}
+                    value={editMovie.runtime}
                     placeholder={RUNTIME_PLACEHOLDER}
-                    onFieldChange={setRuntime}
+                    onFieldChange={changeFieldNumberValue}
                     fieldName='runtime'
                 />
             </div>
@@ -103,7 +124,7 @@ export function MovieForm({movie, okLabel, onSubmit}) {
                 <BorderButton onClick={handleResetClick}>{RESET}</BorderButton>
                 <RedButton
                     key='submit'
-                    onClick={() => onSubmit({id: movie?.id, title, year, movieUrl, genre, overview, runtime})}
+                    onClick={() => onSubmit(editMovie)}
                 >
                     {okLabel}
                 </RedButton>

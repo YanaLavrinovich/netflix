@@ -2,19 +2,20 @@ import React from 'react';
 import './styles.css'
 import PropTypes from 'prop-types';
 import {GenreButton} from '../GenreButton/GenreButton';
+import {GENRE_FILTERS} from './constants';
 
-export function GenreFilter({genres, selectedGenre, onGenreFilterChange}) {
+export function GenreFilter({selectedGenre, onGenreFilterChange}) {
     return (
         <div className='genre-filter'>
             {
-                genres?.map(genre => {
+                GENRE_FILTERS.map(genre => {
                     return <GenreButton
-                                key={genre.id}
-                                isActive={genre.id === selectedGenre}
-                                onClick={() => onGenreFilterChange(genre.id)}
-                            >
-                                {genre.name}
-                            </GenreButton>
+                        key={genre.id}
+                        isActive={genre.id === selectedGenre}
+                        onClick={() => onGenreFilterChange(genre.id)}
+                    >
+                        {genre.name}
+                    </GenreButton>
                 })
             }
         </div>
@@ -22,12 +23,6 @@ export function GenreFilter({genres, selectedGenre, onGenreFilterChange}) {
 }
 
 GenreFilter.propTypes = {
-    genres: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired
-        })
-    ).isRequired,
     selectedGenre: PropTypes.string,
     onGenreFilterChange: PropTypes.func.isRequired
 }

@@ -1,4 +1,5 @@
 .movie-container {
   background: #232323 no-repeat;
   padding: 5px 60px 0 60px;
+  min-height: 100vh;
 }

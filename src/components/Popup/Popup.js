@@ -13,7 +13,7 @@ export function Popup({onClose, title, children}) {
         return () => {
             document.getElementById('modal-root').removeChild(popupEl)
         };
-    }, [popupEl, title])
+    }, [popupEl, title]) //title in deps to improve performance
 
     return ReactDOM.createPortal(
         <div className='popup'>

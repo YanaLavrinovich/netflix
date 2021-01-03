@@ -1,17 +1,22 @@
 import React, {useMemo} from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
-import {MIN} from "./constants";
+import {MIN} from './constants';
 
 export function MovieViewer({movie}) {
-    const {year, movieUrl} = movie
+    const {
+        release_date: releaseDate,
+        poster_path: posterPath,
+        vote_average: voteAverage
+    } = movie
+
     const movieYear = useMemo(() => {
-            return year.substr(0, 4)
+            return releaseDate.substr(0, 4)
         },
-        [year])
+        [releaseDate])
 
     const imageClassName = {
-        backgroundImage: `url(${movieUrl})`,
+        backgroundImage: `url(${posterPath})`,
     }
     return (
         <div className='find-movie-container'>
@@ -21,9 +26,9 @@ export function MovieViewer({movie}) {
             <div className='movie-info-container'>
                 <div className='movie-title'>
                     <p>{movie.title}</p>
-                    <p className='movie-rating'>{movie.rating}</p>
+                    <p className='movie-rating'>{!!voteAverage ? voteAverage : 0}</p>
                 </div>
-                <p className='movie-description'>{movie.description}</p>
+                <p className='movie-tagline'>{movie.tagline}</p>
                 <div className='movie-additional-info'>
                     <p>{movieYear}</p>
                     <p>{movie.runtime} {MIN}</p>

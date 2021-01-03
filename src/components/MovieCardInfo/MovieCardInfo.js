@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import './styles.css'
 
 export const MovieCardInfo = ({movie}) => {
-    const {year} = movie
+    const {release_date: releaseDate} = movie
 
     const movieYear = useMemo(() => {
-            return year.substr(0, 4)
+            return releaseDate.substr(0, 4)
         },
-        [year])
+        [releaseDate])
 
     return (
         <div className='movie-card-info'>
@@ -16,7 +16,7 @@ export const MovieCardInfo = ({movie}) => {
                 <h3 className='movie-card-info-name'>{movie.title}</h3>
                 <p className='movie-card-info-year'>{movieYear}</p>
             </div>
-            <p className='movie-card-info-description'>{movie.description}</p>
+            <p className='movie-card-info-tagline'>{movie.tagline}</p>
         </div>
     )
 }
@@ -24,7 +24,7 @@ export const MovieCardInfo = ({movie}) => {
 MovieCardInfo.propTypes = {
     movie: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        description: PropTypes.string,
-        year: PropTypes.string.isRequired
+        tagline: PropTypes.string,
+        release_date: PropTypes.string.isRequired
     }).isRequired
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles.css';
-import {ERROR_MESSAGE} from "./constants";
+import {ERROR_MESSAGE} from './constants';
 
 export class ErrorBoundary extends React.Component {
     constructor(props) {
