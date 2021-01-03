@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom'
 import './styles.css';
 import {CloseButton} from '../CloseButton/CloseButton';
@@ -6,15 +6,6 @@ import PropTypes from 'prop-types';
 
 
 export function Popup({onClose, title, children}) {
-    const popupEl = document.createElement('div');
-
-    useEffect(() => {
-        document.getElementById('modal-root').appendChild(popupEl);
-        return () => {
-            document.getElementById('modal-root').removeChild(popupEl)
-        };
-    }, [popupEl, title]) //title in deps to improve performance
-
     return ReactDOM.createPortal(
         <div className='popup'>
             <div className='popup_inner'>
@@ -25,7 +16,7 @@ export function Popup({onClose, title, children}) {
                 {children}
             </div>
         </div>,
-        popupEl
+        document.getElementById('modal-root')
     );
 }
 
