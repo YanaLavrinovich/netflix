@@ -1,0 +1,55 @@
+.dropdown-option {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+}
+
+.dropdown-option-checkmark {
+    border-radius: 4px;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #eee;
+}
+
+.dropdown-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.dropdown-option:hover .dropdown-input ~ .dropdown-option-checkmark {
+    background-color: #ccc;
+}
+
+.dropdown-option .dropdown-input:checked ~ .dropdown-option-checkmark {
+    background-color: #f65261;
+}
+
+.dropdown-option-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.dropdown-option .dropdown-input:checked ~ .dropdown-option-checkmark:after {
+    display: block;
+}
+
+.dropdown-option .dropdown-option-checkmark:after {
+    left: 4px;
+    top: 0;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
