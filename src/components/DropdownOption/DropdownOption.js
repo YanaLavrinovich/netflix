@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './styles.css'
+import classNames from 'classnames';
 
 export function DropdownOption({option, checked, onCheckboxChange}) {
 
-    return <label className='dropdown-option' key={option}>
+    return <label className={classNames('dropdown-option', 'dropdown-option-margin')}>
         <input
             type='checkbox'
             className='dropdown-input'

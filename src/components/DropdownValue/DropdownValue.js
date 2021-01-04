@@ -22,7 +22,7 @@ export function DropdownValue({value, placeholder, showOptions, onClick}) {
 }
 
 DropdownValue.propTypes = {
-    value: PropTypes.string,
+    value: PropTypes.array,
     placeholder: PropTypes.string,
     showOptions: PropTypes.bool,
     onClick: PropTypes.func

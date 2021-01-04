@@ -10,13 +10,8 @@
     font-size: large;
 }
 
-.dropdown-list {
-    display: flex;
-    flex-direction: column;
-    color: #fff;
+.dropdown-list-margin {
     margin-top: 10px;
     margin-left: 15px;
-    max-height: 100px;
-    overflow: auto;
     margin-right: 65px;
 }

@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import './styles.css'
-import {DropdownOption} from '../DropdownOption/DropdownOption';
 import {DropdownValue} from '../DropdownValue/DropdownValue';
+import {DropdownList} from '../DropdownList/DropdownList';
 
 export function FormDropdown({placeholder, label, value, options, onCheckboxChange}) {
     const [showOptions, setShowOptions] = useState(false)
@@ -19,15 +19,12 @@ export function FormDropdown({placeholder, label, value, options, onCheckboxChan
                 />
 
                 {showOptions
-                    ? <div className='dropdown-list'>
-                        {options.map((option) => {
-                            return <DropdownOption
-                                option={option}
-                                checked={value.includes(option)}
-                                onCheckboxChange={onCheckboxChange}
-                            />
-                        })}
-                    </div>
+                    ? <DropdownList
+                        className='dropdown-list-margin'
+                        value={value}
+                        options={options}
+                        onCheckboxChange={onCheckboxChange}
+                    />
                     : null}
             </div>
         </div>

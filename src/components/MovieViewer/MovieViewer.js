@@ -31,7 +31,7 @@ export function MovieViewer({movie}) {
                 <p className='movie-tagline'>{movie.tagline}</p>
                 <div className='movie-additional-info'>
                     <p>{movieYear}</p>
-                    <p>{movie.runtime} {MIN}</p>
+                    <p className='movie-runtime'>{!!movie.runtime ? movie.runtime : 0} {MIN}</p>
                 </div>
                 <p className='movie-long-description'>{movie.overview}</p>
             </div>
