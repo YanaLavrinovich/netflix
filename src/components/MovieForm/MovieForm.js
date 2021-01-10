@@ -29,19 +29,19 @@ const movieDefault = {
 
 const movieSchema = Yup.object().shape({
     title: Yup.string()
-        .required('Required'),
+        .required('Required field'),
     release_date: Yup.date()
-        .required('Required'),
+        .required('Required field'),
     poster_path: Yup.string()
-        .required('Required'),
+        .required('Required field'),
     overview: Yup.string()
-        .required('Required'),
+        .required('Required field'),
     runtime: Yup.number()
         .min(0, 'Min value is 0')
-        .required('Required'),
+        .required('Required field'),
     genres: Yup.array()
         .min(1, 'Select at least one genre to proceed')
-        .required('Required')
+        .required('Required field')
 });
 
 const formikEnhancer = withFormik({
