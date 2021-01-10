@@ -17,6 +17,7 @@ export function FormGroup({
         'form-group-input': true,
         'form-group-input-error': showError
     });
+
     return (
         <div className='form-group'>
             <label className='form-group-input-label'>{label}</label>
@@ -28,7 +29,7 @@ export function FormGroup({
                         placeholder={placeholder}
                         id={name}
                         name={name}
-                        value={meta.value}
+                        value={!!meta.value ? meta.value : ''}
                         onChange={field.onChange}
                     />
                     {showError && (

@@ -5,13 +5,17 @@ import {FormGroup} from '../FormGroup/FormGroup';
 import {BorderButton} from '../BorderButton/BorderButton';
 import PropTypes from 'prop-types';
 import {
+    AT_LEAST_ONE_GENRE,
     DATE_PLACEHOLDER,
     GENRE_PLACEHOLDER,
+    MIN_VALUE_IS_ZERO,
     MOVIE_URL_PLACEHOLDER,
     OVERVIEW_PLACEHOLDER,
+    REQUIRED_FIELD,
     RESET,
     RUNTIME_PLACEHOLDER,
-    TITLE_PLACEHOLDER
+    TITLE_PLACEHOLDER,
+    WRONG_URL
 } from './constants';
 import {FormDropdown} from '../FormDropdown/FormDropdown';
 import {genres} from '../../layouts/MovieListPage/MovieConstants';
@@ -29,19 +33,20 @@ const movieDefault = {
 
 const movieSchema = Yup.object().shape({
     title: Yup.string()
-        .required('Required field'),
+        .required(REQUIRED_FIELD),
     release_date: Yup.date()
-        .required('Required field'),
+        .required(REQUIRED_FIELD),
     poster_path: Yup.string()
-        .required('Required field'),
+        .matches('https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)', WRONG_URL)
+        .required(REQUIRED_FIELD),
     overview: Yup.string()
-        .required('Required field'),
+        .required(REQUIRED_FIELD),
     runtime: Yup.number()
-        .min(0, 'Min value is 0')
-        .required('Required field'),
+        .min(0, MIN_VALUE_IS_ZERO)
+        .required(REQUIRED_FIELD),
     genres: Yup.array()
-        .min(1, 'Select at least one genre to proceed')
-        .required('Required field')
+        .min(1, AT_LEAST_ONE_GENRE)
+        .required(REQUIRED_FIELD)
 });
 
 const formikEnhancer = withFormik({

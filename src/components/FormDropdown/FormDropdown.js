@@ -27,7 +27,7 @@ export function FormDropdown({placeholder, label, options, name}) {
                     name={name}
                     value={meta.value}
                     options={options}
-                    onCheckboxChange={field.onCheckboxChange}
+                    onCheckboxChange={field.onChange}
                 />}
                 {showError && (
                     <div className='form-group-error'>{meta.error}</div>
