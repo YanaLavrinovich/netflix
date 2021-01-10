@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import './styles.css'
 import classNames from 'classnames';
 
-export function DropdownValue({value, placeholder, showOptions, onClick}) {
+export function DropdownValue({value, placeholder, showOptions, onClick, showError}) {
     const inputClasses = classNames({
         'form-dropdown-input': true,
         'dropdown-open': showOptions,
-        'dropdown-close': !showOptions
+        'dropdown-close': !showOptions,
+        'form-dropdown-input-error': showError
     })
 
     return <label

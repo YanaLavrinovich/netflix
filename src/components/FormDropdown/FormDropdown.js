@@ -3,29 +3,35 @@ import PropTypes from 'prop-types';
 import './styles.css'
 import {DropdownValue} from '../DropdownValue/DropdownValue';
 import {DropdownList} from '../DropdownList/DropdownList';
+import {useField} from 'formik';
 
-export function FormDropdown({placeholder, label, value, options, onCheckboxChange}) {
+export function FormDropdown({placeholder, label, options, name}) {
     const [showOptions, setShowOptions] = useState(false)
+    const [field, meta] = useField(name);
+    const showError = meta.touched && meta.error;
 
     return (
         <div className='form-dropdown'>
             <label className='form-dropdown-label'>{label}</label>
             <div>
                 <DropdownValue
-                    value={value}
+                    value={meta.value}
                     placeholder={placeholder}
                     showOptions={showOptions}
+                    showError={showError}
                     onClick={() => setShowOptions(!showOptions)}
                 />
 
-                {showOptions
-                    ? <DropdownList
-                        className='dropdown-list-margin'
-                        value={value}
-                        options={options}
-                        onCheckboxChange={onCheckboxChange}
-                    />
-                    : null}
+                {showOptions && <DropdownList
+                    className='dropdown-list-margin'
+                    name={name}
+                    value={meta.value}
+                    options={options}
+                    onCheckboxChange={field.onCheckboxChange}
+                />}
+                {showError && (
+                    <div className='form-group-error'>{meta.error}</div>
+                )}
             </div>
         </div>
     )
@@ -33,8 +39,7 @@ export function FormDropdown({placeholder, label, value, options, onCheckboxChan
 
 FormDropdown.propTypes = {
     label: PropTypes.string,
-    value: PropTypes.array,
     options: PropTypes.array,
     placeholder: PropTypes.string,
-    onCheckboxChange: PropTypes.func
+    name: PropTypes.string
 }

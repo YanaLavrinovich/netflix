@@ -17,17 +17,17 @@ function MovieListPage(props) {
         [selectedSort, setSelectedSort] = useState(DATE_SORT)
 
     const {moviesData, fetchMovies, setVisiblePopupName, setViewedMovie} = props
-    const {movies, viewedMovie, isLoading, isNeedUpdateMovies} = moviesData
+    const {movies, viewedMovie, isLoading, isNeedUpdateMovies, searchText} = moviesData
 
     useEffect(() => {
         if (!!isNeedUpdateMovies) {
-            fetchMovies(selectedGenre, selectedSort)
+            fetchMovies(selectedGenre, selectedSort, searchText)
         }
-    }, [isNeedUpdateMovies, selectedGenre, selectedSort, fetchMovies])
+    }, [isNeedUpdateMovies, selectedGenre, selectedSort, fetchMovies, searchText])
 
     useEffect(() => {
-        fetchMovies(selectedGenre, selectedSort)
-    }, [selectedGenre, selectedSort, fetchMovies])
+        fetchMovies(selectedGenre, selectedSort, searchText)
+    }, [selectedGenre, selectedSort, fetchMovies, searchText])
 
 
     const handleMovieClick = useCallback((movieId) => {
@@ -78,7 +78,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    fetchMovies: (selectedGenre, selectedSort) => dispatch(fetchMoviesAction(selectedGenre, selectedSort)),
+    fetchMovies: (selectedGenre, selectedSort, searchText) => dispatch(fetchMoviesAction(selectedGenre, selectedSort, searchText)),
     setVisiblePopupName: (popupName) => dispatch(setVisiblePopupNameAction(popupName)),
     setViewedMovie: (movieId) => dispatch(setViewedMovieAction(movieId))
 })

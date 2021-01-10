@@ -8,6 +8,7 @@ import {
     FETCH_MOVIES_FAILURE,
     FETCH_MOVIES_STARTED,
     FETCH_MOVIES_SUCCESS,
+    SET_SEARCH_TEXT,
     SET_VIEWED_MOVIE,
     UPDATE_MOVIE_FAILURE,
     UPDATE_MOVIE_STARTED,
@@ -19,6 +20,7 @@ const initialState = {
     movies: [],
     error: null,
     viewedMovie: null,
+    searchText: '',
     isNeedUpdateMovies: false
 };
 
@@ -61,6 +63,11 @@ export function movies(state = initialState, action) {
             return {
                 ...state,
                 viewedMovie: action.payload
+            }
+        case SET_SEARCH_TEXT:
+            return {
+                ...state,
+                searchText: action.payload
             }
         default:
             return state;

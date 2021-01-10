@@ -8,6 +8,7 @@ import {
     FETCH_MOVIES_FAILURE,
     FETCH_MOVIES_STARTED,
     FETCH_MOVIES_SUCCESS,
+    SET_SEARCH_TEXT,
     SET_VIEWED_MOVIE,
     UPDATE_MOVIE_FAILURE,
     UPDATE_MOVIE_STARTED,
@@ -17,7 +18,7 @@ import axios from 'axios';
 import {GENRE_ALL} from '../../layouts/MovieListPage/MovieConstants';
 
 
-export const fetchMoviesAction = (selectedGenre, selectedSort) => {
+export const fetchMoviesAction = (selectedGenre, selectedSort, searchText) => {
     return dispatch => {
         dispatch(fetchMoviesStarted())
 
@@ -26,6 +27,8 @@ export const fetchMoviesAction = (selectedGenre, selectedSort) => {
                 sortBy: selectedSort,
                 sortOrder: 'desc',
                 filter: selectedGenre !== GENRE_ALL ? selectedGenre : null,
+                searchBy: 'title',
+                search: searchText,
                 limit: 12
             }
         })
@@ -82,6 +85,10 @@ export const createMovieAction = (newMovie) => {
 
 export const setViewedMovieAction = (movieId) => {
     return {type: SET_VIEWED_MOVIE, payload: movieId}
+}
+
+export const setSearchTextAction = (searchText) => {
+    return {type: SET_SEARCH_TEXT, payload: searchText}
 }
 
 const fetchMoviesStarted = () => {

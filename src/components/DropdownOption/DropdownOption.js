@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import './styles.css'
 import classNames from 'classnames';
 
-export function DropdownOption({option, checked, onCheckboxChange}) {
+export function DropdownOption({name, option, checked, onCheckboxChange}) {
 
     return <label className={classNames('dropdown-option', 'dropdown-option-margin')}>
         <input
             type='checkbox'
+            name={name}
             className='dropdown-input'
             value={option}
             onChange={onCheckboxChange}
@@ -19,6 +20,7 @@ export function DropdownOption({option, checked, onCheckboxChange}) {
 }
 
 DropdownOption.propTypes = {
+    name: PropTypes.string,
     option: PropTypes.string,
     checked: PropTypes.bool,
     onCheckboxChange: PropTypes.func

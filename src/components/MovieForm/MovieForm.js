@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React from 'react';
 import './styles.css'
 import {RedButton} from '../RedButton/RedButton';
 import {FormGroup} from '../FormGroup/FormGroup';
@@ -15,6 +15,8 @@ import {
 } from './constants';
 import {FormDropdown} from '../FormDropdown/FormDropdown';
 import {genres} from '../../layouts/MovieListPage/MovieConstants';
+import {Form, withFormik} from 'formik';
+import * as Yup from 'yup';
 
 const movieDefault = {
     title: '',
@@ -25,112 +27,85 @@ const movieDefault = {
     runtime: ''
 }
 
-export function MovieForm({movie, okLabel, onSubmit}) {
-    const [editMovie, setEditMovie] = useState(movieDefault)
+const movieSchema = Yup.object().shape({
+    title: Yup.string()
+        .required('Required'),
+    release_date: Yup.date()
+        .required('Required'),
+    poster_path: Yup.string()
+        .required('Required'),
+    overview: Yup.string()
+        .required('Required'),
+    runtime: Yup.number()
+        .min(0, 'Min value is 0')
+        .required('Required'),
+    genres: Yup.array()
+        .min(1, 'Select at least one genre to proceed')
+        .required('Required')
+});
 
-    useEffect(() => {
-        if (movie) {
-            setEditMovie(movie)
+const formikEnhancer = withFormik({
+    mapPropsToValues: ({movie}) => {
+        const editMovie = !!movie ? movie : movieDefault
+        return {...editMovie}
+    },
+    validationSchema: movieSchema,
+    handleSubmit: (values, {props}) => {
+        props.onSubmit(values)
+    }
+})
+
+function MovieForm({
+                       movie,
+                       okLabel,
+                       handleReset,
+                   }) {
+    return <Form>
+        {!!movie &&
+        <FormGroup
+            name='id'
+            label='MOVIE ID'
+            isReadOnly={true}
+        />
         }
-    }, [movie])
-
-    const handleResetClick = useCallback(() => {
-        if (movie) {
-            setEditMovie(movie)
-        } else {
-            setEditMovie(movieDefault)
-        }
-    }, [movie])
-
-    const changeFieldValue = useCallback((field, value) => {
-        const newMovie = {...editMovie}
-        newMovie[field] = value
-        setEditMovie(newMovie)
-    }, [editMovie])
-
-    const changeFieldNumberValue = useCallback((field, value) => {
-        const newMovie = {...editMovie}
-        newMovie[field] = !Number.isNaN(value) ? Number.parseInt(value) : ''
-        setEditMovie(newMovie)
-    }, [editMovie])
-
-    const handleCheckboxChange = useCallback((e) => {
-        let newGenre = [...editMovie.genres]
-        if (e.target.checked) {
-            newGenre = [...newGenre, e.target.value]
-        } else {
-            newGenre = newGenre.filter(genre => genre !== e.target.value)
-        }
-        setEditMovie({...editMovie, genres: newGenre})
-    }, [editMovie])
-
-    return (
-        <>
-            <div>
-                {!!movie &&
-                <FormGroup
-                    label='MOVIE ID'
-                    value={editMovie.id}
-                    isReadOnly={true}
-                />
-                }
-                <FormGroup
-                    label='TITLE'
-                    value={editMovie.title}
-                    placeholder={TITLE_PLACEHOLDER}
-                    onFieldChange={changeFieldValue}
-                    fieldName='title'
-                />
-                <FormGroup
-                    type='date'
-                    label='RELEASE DATE'
-                    value={editMovie.release_date}
-                    placeholder={DATE_PLACEHOLDER}
-                    onFieldChange={changeFieldValue}
-                    fieldName='release_date'
-                />
-                <FormGroup
-                    label='MOVIE URL'
-                    value={editMovie.poster_path}
-                    placeholder={MOVIE_URL_PLACEHOLDER}
-                    onFieldChange={changeFieldValue}
-                    fieldName='poster_path'
-                />
-                <FormDropdown
-                    label='GENRE'
-                    value={editMovie.genres}
-                    options={genres}
-                    placeholder={GENRE_PLACEHOLDER}
-                    onCheckboxChange={handleCheckboxChange}
-                    fieldName='genres'
-                />
-                <FormGroup
-                    label='OVERVIEW'
-                    value={editMovie.overview}
-                    placeholder={OVERVIEW_PLACEHOLDER}
-                    onFieldChange={changeFieldValue}
-                    fieldName='overview'
-                />
-                <FormGroup
-                    label='RUNTIME'
-                    value={editMovie.runtime}
-                    placeholder={RUNTIME_PLACEHOLDER}
-                    onFieldChange={changeFieldNumberValue}
-                    fieldName='runtime'
-                />
-            </div>
-
-            <div className='movie-form-footer'>
-                <BorderButton onClick={handleResetClick}>{RESET}</BorderButton>
-                <RedButton
-                    key='submit'
-                    onClick={() => onSubmit(editMovie)}
-                >
-                    {okLabel}
-                </RedButton>
-            </div>
-        </>
-    )
+        <FormGroup
+            name='title'
+            label='TITLE'
+            placeholder={TITLE_PLACEHOLDER}
+        />
+        <FormGroup
+            name='release_date'
+            type='date'
+            label='RELEASE DATE'
+            placeholder={DATE_PLACEHOLDER}
+        />
+        <FormGroup
+            name='poster_path'
+            label='MOVIE URL'
+            placeholder={MOVIE_URL_PLACEHOLDER}
+        />
+        <FormDropdown
+            name='genres'
+            label='GENRE'
+            options={genres}
+            placeholder={GENRE_PLACEHOLDER}
+        />
+        <FormGroup
+            name='overview'
+            label='OVERVIEW'
+            placeholder={OVERVIEW_PLACEHOLDER}
+        />
+        <FormGroup
+            name='runtime'
+            type='number'
+            label='RUNTIME'
+            placeholder={RUNTIME_PLACEHOLDER}
+        />
+        <div className='movie-form-footer'>
+            <BorderButton onClick={handleReset}>{RESET}</BorderButton>
+            <RedButton type='submit'>{okLabel}</RedButton>
+        </div>
+    </Form>
 }
 
 MovieForm.propTypes = {
@@ -138,3 +113,5 @@ MovieForm.propTypes = {
     okLabel: PropTypes.string.isRequired,
     onSubmit: PropTypes.func
 }
+
+export default formikEnhancer(MovieForm)

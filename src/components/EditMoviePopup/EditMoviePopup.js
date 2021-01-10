@@ -1,6 +1,6 @@
 import React from 'react';
 import {Popup} from '../Popup/Popup';
-import {MovieForm} from '../MovieForm/MovieForm';
+import MovieForm from '../MovieForm/MovieForm';
 import PropTypes from 'prop-types';
 import {EDIT_MOVIE, SAVE} from './constants';
 

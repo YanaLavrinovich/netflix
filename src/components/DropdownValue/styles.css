@@ -13,6 +13,10 @@
     cursor: pointer;
 }
 
+.form-dropdown-input-error {
+    border: solid 1px #f65261;
+}
+
 .dropdown-close:after {
     content: url('./arrow.ico');
     height: 20px;

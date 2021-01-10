@@ -1,33 +1,42 @@
 .form-group-read-only-input {
-  display: block;
-  width: 90%;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #fff;
-  font-size: 25px;
+    display: block;
+    width: 90%;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #fff;
+    font-size: 25px;
 }
 
 .form-group-input {
-  display: block;
-  width: 90%;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #fff;
-  background: rgba(88, 88, 88, 0.5);
-  border: none;
-  border-radius: 6px;
-  font-size: 25px;
-  padding: 15px 0 15px 15px;
+    display: block;
+    width: 90%;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #fff;
+    background: rgba(88, 88, 88, 0.5);
+    border: none;
+    border-radius: 6px;
+    font-size: 25px;
+    padding: 15px 0 15px 15px;
+}
+
+.form-group-input-error {
+    border: solid 1px #f65261;
+}
+
+.form-group-error {
+    color: #f65261;
+    margin-top: 10px;
 }
 
 .form-group-input-label {
-  color: #f65261;
-  display: inline-block;
-  margin-bottom: 15px;
-  font-size: large;
+    color: #f65261;
+    display: inline-block;
+    margin-bottom: 15px;
+    font-size: large;
 }
 
 .form-group {
-  margin-bottom: 30px;
-  margin-left: 60px;
+    margin-bottom: 30px;
+    margin-left: 60px;
 }

@@ -1,21 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import './styles.css'
+import {useField} from 'formik';
 
-export function FormGroup({type, fieldName, placeholder, label, value, onFieldChange, isReadOnly = false}) {
+export function FormGroup({
+                              type,
+                              name,
+                              placeholder,
+                              label,
+                              isReadOnly = false,
+                          }) {
+    const [field, meta] = useField(name);
+    const showError = meta.touched && meta.error;
+    const inputClasses = classNames({
+        'form-group-input': true,
+        'form-group-input-error': showError
+    });
     return (
         <div className='form-group'>
             <label className='form-group-input-label'>{label}</label>
             {!isReadOnly
-                ? <input
-                    type={type}
-                    className='form-group-input'
-                    placeholder={placeholder}
-                    name={fieldName}
-                    value={!!value ? value : ''}
-                    onChange={(e) => onFieldChange(fieldName, e.target.value)}
-                />
-                : <div className='form-group-read-only-input'>{value}</div>
+                ? <>
+                    <input
+                        type={type}
+                        className={inputClasses}
+                        placeholder={placeholder}
+                        id={name}
+                        name={name}
+                        value={meta.value}
+                        onChange={field.onChange}
+                    />
+                    {showError && (
+                        <div className='form-group-error'>{meta.error}</div>
+                    )}
+                </>
+                : <div className='form-group-read-only-input'>{meta.value}</div>
             }
 
         </div>
@@ -25,9 +45,7 @@ export function FormGroup({type, fieldName, placeholder, label, value, onFieldCh
 FormGroup.propTypes = {
     type: PropTypes.string,
     label: PropTypes.string,
-    fieldName: PropTypes.string,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string,
     placeholder: PropTypes.string,
-    onFieldChange: PropTypes.func,
     isReadOnly: PropTypes.bool
 }
