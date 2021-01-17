@@ -20,7 +20,7 @@ import {
 import {FormDropdown} from '../FormDropdown/FormDropdown';
 import {Form, Formik} from 'formik';
 import * as Yup from 'yup';
-import {genres} from "../../layouts/MovieListPage/constants";
+import {genres} from '../../layouts/MovieListPage/constants';
 
 const movieDefault = {
     title: '',

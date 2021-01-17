@@ -9,9 +9,10 @@ import {
     SET_SELECTED_SORT
 } from '../actions/types';
 import {DATE_SORT, GENRE_ALL} from '../../layouts/common/constants';
+import {MACHINE_STATE} from './constants';
 
 const initialState = {
-    isLoading: false,
+    machine: MACHINE_STATE.IDLE,
     movies: [],
     totalAmount: 0,
     selectedGenre: GENRE_ALL,
@@ -26,32 +27,30 @@ export function movies(state = initialState, action) {
         case REQUEST_STARTED:
             return {
                 ...state,
-                isLoading: true
+                machine: MACHINE_STATE.FETCHING
             }
         case FETCH_MOVIES_SUCCESS:
             return {
                 ...state,
-                isLoading: false,
-                error: null,
+                machine: MACHINE_STATE.IDLE,
                 movies: action.payload.data,
                 totalAmount: action.payload.totalAmount
             }
         case FETCH_MOVIE_SUCCESS:
             return {
                 ...state,
-                isLoading: false,
-                error: null,
+                machine: MACHINE_STATE.IDLE,
                 viewedMovie: action.payload
             }
         case REQUEST_SUCCESS:
             return {
                 ...state,
-                error: null
+                machine: MACHINE_STATE.IDLE,
             }
         case REQUEST_FAILURE:
             return {
                 ...state,
-                isLoading: false,
+                machine: MACHINE_STATE.ERROR,
                 error: action.payload.error
             }
         case SET_SEARCH_TEXT:

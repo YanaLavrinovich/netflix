@@ -9,12 +9,29 @@
 }
 
 .not-found-container {
- padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
     min-height: 73%;
+}
+
+.not-found-image {
+    background: url("404-image.gif") no-repeat;
+    width: 480px;
+    height: 320px;
 }
 
 .not-found-label {
     font-size: xx-large;
     font-weight: lighter;
     color: #ffffff;
+}
+
+
+.not-found-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }

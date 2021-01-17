@@ -4,7 +4,7 @@ import {MovieList} from '../MovieList/MovieList';
 import './styles.css';
 import PropTypes from 'prop-types';
 import {Label} from '../Label/Label';
-import {PLEASE_WAIT} from "./constants";
+import {PLEASE_WAIT} from './constants';
 
 export const MovieContainer = ({
                                    isLoading,

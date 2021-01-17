@@ -16,7 +16,8 @@ import {setVisiblePopupNameAction} from '../../redux/actions/popups';
 import MoviePopupContainer from '../MoviePopupContainer/MoviePopupContainer';
 import {POPUP_TYPE} from '../MoviePopupContainer/constants';
 import {useHistory, useParams} from 'react-router-dom';
-import {sortOptions} from "./constants";
+import {sortOptions} from './constants';
+import {MACHINE_STATE} from '../../redux/reducers/constants';
 
 function MovieListPage(props) {
     const [currentMovieId, setCurrentMovieId] = useState('')
@@ -32,7 +33,7 @@ function MovieListPage(props) {
     const {
         movies,
         viewedMovie,
-        isLoading,
+        machine,
         totalAmount,
         selectedSort,
         selectedGenre
@@ -66,7 +67,7 @@ function MovieListPage(props) {
                     onSearchClick={handleSearchClick}
                 />
                 <MovieContainer
-                    isLoading={isLoading}
+                    isLoading={machine === MACHINE_STATE.FETCHING}
                     selectedGenre={selectedGenre}
                     totalAmount={totalAmount}
                     movies={movies}
