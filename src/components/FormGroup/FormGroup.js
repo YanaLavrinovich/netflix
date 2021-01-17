@@ -29,7 +29,7 @@ export function FormGroup({
                         placeholder={placeholder}
                         id={name}
                         name={name}
-                        value={!!meta.value ? meta.value : ''}
+                        value={meta.value || ''}
                         onChange={field.onChange}
                     />
                     {showError && (

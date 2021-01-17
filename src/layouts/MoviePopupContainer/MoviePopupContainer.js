@@ -5,7 +5,7 @@ import {DeleteMoviePopup} from '../../components/DeleteMoviePopup/DeleteMoviePop
 import {
     createMovieAction,
     deleteMovieAction,
-    setViewedMovieAction,
+    fetchMovieByIdAction,
     updateMovieAction
 } from '../../redux/actions/movies';
 import {connect} from 'react-redux';
@@ -34,7 +34,6 @@ function MoviePopupContainer({
         setVisiblePopupName('')
 
         if (newMovie.id === viewedMovie?.id) {
-            setViewedMovie(null)
             setViewedMovie(newMovie)
         }
     }, [viewedMovie, updateMovie, setVisiblePopupName, setViewedMovie])
@@ -78,7 +77,7 @@ const mapDispatchToProps = dispatch => ({
     updateMovie: (updateMovie) => dispatch(updateMovieAction(updateMovie)),
     deleteMovie: (movieId) => dispatch(deleteMovieAction(movieId)),
     setVisiblePopupName: (popupName) => dispatch(setVisiblePopupNameAction(popupName)),
-    setViewedMovie: (movieId) => dispatch(setViewedMovieAction(movieId))
+    setViewedMovie: (movieId) => dispatch(fetchMovieByIdAction(movieId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoviePopupContainer)

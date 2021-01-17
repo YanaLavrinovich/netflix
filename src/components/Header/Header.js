@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './styles.css';
 import {MovieSearcher} from '../MovieSearcher/MovieSearcher';
 import {HeaderLogo} from '../HeaderLogo/HeaderLogo';
@@ -8,22 +8,37 @@ import PropTypes from 'prop-types';
 import {MagnifierButton} from '../MagnifierButton/MagnifierButton';
 import {MovieViewer} from '../MovieViewer/MovieViewer';
 import {NETFLIX, PLUS_ADD_MOVIE, ROULETTE} from './constants';
+import {useParams} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {fetchMovieByIdAction} from '../../redux/actions/movies';
 
-export const Header = ({viewedMovie, onAddMovieClick, onMagnifierClick}) => {
+const Header = ({
+                    viewedMovie,
+                    fetchMovieById,
+                    onAddMovieClick,
+                    onMagnifierClick,
+                    onSearchClick
+                }) => {
+    const {id} = useParams()
+
+    useEffect(() => {
+        id && fetchMovieById(id)
+    }, [fetchMovieById, id])
+
     return (
         <div className='header'>
             <NavBar>
                 <HeaderLogo><b>{NETFLIX}</b>{ROULETTE}</HeaderLogo>
 
-                {viewedMovie?.id
+                {!!id
                     ? <MagnifierButton onClick={onMagnifierClick}/>
                     : <ShadowButton onClick={onAddMovieClick}>{PLUS_ADD_MOVIE}</ShadowButton>}
             </NavBar>
 
             <div className='header-container'>
-                {viewedMovie?.id
+                {!!id && !!viewedMovie
                     ? <MovieViewer movie={viewedMovie}/>
-                    : <MovieSearcher/>}
+                    : <MovieSearcher onSearchClick={onSearchClick}/>}
             </div>
 
         </div>
@@ -31,7 +46,17 @@ export const Header = ({viewedMovie, onAddMovieClick, onMagnifierClick}) => {
 };
 
 Header.propTypes = {
-    viewedMovie: PropTypes.object,
     onAddMovieClick: PropTypes.func,
-    onMagnifierClick: PropTypes.func
+    onMagnifierClick: PropTypes.func,
+    onSearchClick: PropTypes.func
 }
+
+const mapStateToProps = state => ({
+    viewedMovie: state.movies.viewedMovie
+})
+
+const mapDispatchToProps = dispatch => ({
+    fetchMovieById: (movieId) => dispatch(fetchMovieByIdAction(movieId))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

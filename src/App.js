@@ -5,14 +5,31 @@ import {Provider} from 'react-redux';
 import reducers from './redux/reducers'
 import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {NotFoundPage} from './layouts/NotFoundPage/NotFoundPage';
+
+const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))
 
 function App() {
-
-    const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))
-
     return (
         <Provider store={store}>
-            <MovieListPage/>
+            <BrowserRouter forceRefresh={false}>
+                <Switch>
+                    <Route path='/film/:id' exact>
+                        <MovieListPage/>
+                    </Route>
+                    <Route path='/search/:query' exact>
+                        <MovieListPage/>
+                    </Route>
+                    <Route path='/' exact>
+                        <MovieListPage/>
+                    </Route>
+                    <Route>
+                        <NotFoundPage/>
+                    </Route>
+                </Switch>
+            </BrowserRouter>
+
         </Provider>
 
     );

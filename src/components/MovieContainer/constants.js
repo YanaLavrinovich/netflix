@@ -1,0 +1,1 @@
+export const PLEASE_WAIT = 'Please wait...'

@@ -4,46 +4,44 @@ import {SearchInput} from '../SearchInput/SearchInput';
 import {RedButton} from '../RedButton/RedButton';
 import './styles.css';
 import PropTypes from 'prop-types';
-import {useFormik} from 'formik';
-import {connect} from 'react-redux';
-import {setSearchTextAction} from '../../redux/actions/movies';
+import {Formik} from 'formik';
+import * as Yup from 'yup';
+import {REQUIRED_FIELD} from '../MovieForm/constants';
 
-function SearchForm({title, searchLabel, searchText, setSearchText}) {
-    const formik = useFormik({
-        initialValues: {
-            searchText: searchText
-        },
-        onSubmit: (values) => {
-            setSearchText(values.searchText)
-        }
-    })
+const searchSchema = Yup.object().shape({
+    searchText: Yup.string()
+        .required(REQUIRED_FIELD)
+});
 
+export function SearchForm({title, searchLabel, searchText, onSearchClick}) {
     return (
-        <form className='search-form' onSubmit={formik.handleSubmit}>
-            <Title>{title}</Title>
-            <div className='search-form-row'>
-                <SearchInput
-                    name='searchText'
-                    value={formik.values.searchText}
-                    onChange={formik.handleChange}
-                />
-                <RedButton type='submit'>{searchLabel}</RedButton>
-            </div>
-        </form>
+        <Formik
+            initialValues={{
+                searchText: searchText
+            }}
+            validationSchema={searchSchema}
+            onSubmit={(values) => {
+                onSearchClick(values.searchText)
+            }}>
+            {props => (
+                <form className='search-form' onSubmit={props.handleSubmit}>
+                    <Title>{title}</Title>
+                    <div className='search-form-row'>
+                        <SearchInput
+                            name='searchText'
+                        />
+                        <RedButton type='submit'>{searchLabel}</RedButton>
+                    </div>
+                </form>
+            )}
+        </Formik>
+
     )
 }
 
-const mapStateToProps = state => ({
-    searchText: state.movies.searchText
-})
-
-const mapDispatchToProps = dispatch => ({
-    setSearchText: (searchText) => dispatch(setSearchTextAction(searchText))
-})
-
 SearchForm.propTypes = {
     title: PropTypes.string,
-    searchLabel: PropTypes.string
+    searchLabel: PropTypes.string,
+    searchText: PropTypes.string,
+    onSearchClick: PropTypes.func
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchForm)

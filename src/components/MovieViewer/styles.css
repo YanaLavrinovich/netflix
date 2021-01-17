@@ -28,7 +28,16 @@
     padding: 10px 25px 10px 25px;
     height: 85px;
     width: 85px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    font-size: 3em;
+    font-weight: initial;
+    margin-top: 0.67em;
+    margin-bottom: 0;
+    margin-left: 0.67em;
 }
 
 .movie-tagline {
@@ -41,7 +50,7 @@
     color: #ffffff;
 }
 
-.movie-title p {
+.movie-title-name {
     font-size: 4em;
     font-weight: initial;
     display: block;

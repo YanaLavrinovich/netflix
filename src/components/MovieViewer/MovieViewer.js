@@ -25,13 +25,13 @@ export function MovieViewer({movie}) {
             </div>
             <div className='movie-info-container'>
                 <div className='movie-title'>
-                    <p>{movie.title}</p>
-                    <p className='movie-rating'>{!!voteAverage ? voteAverage : 0}</p>
+                    <div className='movie-title-name'>{movie.title}</div>
+                    <div className='movie-rating'>{voteAverage || 0}</div>
                 </div>
                 <p className='movie-tagline'>{movie.tagline}</p>
                 <div className='movie-additional-info'>
                     <p>{movieYear}</p>
-                    <p className='movie-runtime'>{!!movie.runtime ? movie.runtime : 0} {MIN}</p>
+                    <p className='movie-runtime'>{movie.runtime || 0} {MIN}</p>
                 </div>
                 <p className='movie-long-description'>{movie.overview}</p>
             </div>
@@ -40,5 +40,5 @@ export function MovieViewer({movie}) {
 }
 
 MovieViewer.propTypes = {
-    movie: PropTypes.object
+    movieId: PropTypes.string
 }

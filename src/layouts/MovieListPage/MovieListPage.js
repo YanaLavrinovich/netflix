@@ -1,39 +1,55 @@
 import {ErrorBoundary} from '../../components/ErrorBoundary/ErrorBoundary';
-import {Header} from '../../components/Header/Header';
+import Header from '../../components/Header/Header';
 import {MovieContainer} from '../../components/MovieContainer/MovieContainer';
 import {Footer} from '../../components/Footer/Footer';
 import {FooterLogo} from '../../components/FooterLogo/FooterLogo';
-import {DATE_SORT, GENRE_ALL, NETFLIX, ROULETTE, sortOptions} from './MovieConstants';
+import {NETFLIX, ROULETTE} from '../common/constants';
 import React, {useCallback, useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-import {fetchMoviesAction, setViewedMovieAction} from '../../redux/actions/movies';
+import {
+    fetchMoviesAction,
+    setSearchTextAction,
+    setSelectedGenreAction,
+    setSelectedSortAction
+} from '../../redux/actions/movies';
 import {setVisiblePopupNameAction} from '../../redux/actions/popups';
 import MoviePopupContainer from '../MoviePopupContainer/MoviePopupContainer';
 import {POPUP_TYPE} from '../MoviePopupContainer/constants';
+import {useHistory, useParams} from 'react-router-dom';
+import {sortOptions} from "./constants";
 
 function MovieListPage(props) {
-    const [currentMovieId, setCurrentMovieId] = useState(''),
-        [selectedGenre, setSelectedGenre] = useState(GENRE_ALL),
-        [selectedSort, setSelectedSort] = useState(DATE_SORT)
+    const [currentMovieId, setCurrentMovieId] = useState('')
+    const history = useHistory()
 
-    const {moviesData, fetchMovies, setVisiblePopupName, setViewedMovie} = props
-    const {movies, viewedMovie, isLoading, isNeedUpdateMovies, searchText} = moviesData
+    const {
+        moviesData,
+        setVisiblePopupName,
+        setSelectedGenre,
+        setSelectedSort,
+        setSearchText
+    } = props
+    const {
+        movies,
+        viewedMovie,
+        isLoading,
+        totalAmount,
+        selectedSort,
+        selectedGenre
+    } = moviesData
 
+    const {query} = useParams()
     useEffect(() => {
-        if (!!isNeedUpdateMovies) {
-            fetchMovies(selectedGenre, selectedSort, searchText)
-        }
-    }, [isNeedUpdateMovies, selectedGenre, selectedSort, fetchMovies, searchText])
-
-    useEffect(() => {
-        fetchMovies(selectedGenre, selectedSort, searchText)
-    }, [selectedGenre, selectedSort, fetchMovies, searchText])
-
+        !!query && setSearchText(query)
+    }, [setSearchText, query])
 
     const handleMovieClick = useCallback((movieId) => {
-        const movie = movies.find(m => m.id === movieId)
-        setViewedMovie(movie)
-    }, [movies, setViewedMovie])
+        history.push(`/film/${movieId}`)
+    }, [history])
+
+    const handleSearchClick = useCallback((searchText) => {
+        history.push(`/search/${searchText}`)
+    }, [history])
 
     const handlePopupOpen = useCallback((popupName) => (id) => {
         setCurrentMovieId(id)
@@ -46,11 +62,13 @@ function MovieListPage(props) {
                 <Header
                     viewedMovie={viewedMovie}
                     onAddMovieClick={() => setVisiblePopupName(POPUP_TYPE.ADD)}
-                    onMagnifierClick={() => setViewedMovie(null)}
+                    onMagnifierClick={() => history.push('/')}
+                    onSearchClick={handleSearchClick}
                 />
                 <MovieContainer
                     isLoading={isLoading}
                     selectedGenre={selectedGenre}
+                    totalAmount={totalAmount}
                     movies={movies}
                     sortOptions={sortOptions}
                     selectedSort={selectedSort}
@@ -78,9 +96,11 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    fetchMovies: (selectedGenre, selectedSort, searchText) => dispatch(fetchMoviesAction(selectedGenre, selectedSort, searchText)),
+    fetchMovies: () => dispatch(fetchMoviesAction()),
     setVisiblePopupName: (popupName) => dispatch(setVisiblePopupNameAction(popupName)),
-    setViewedMovie: (movieId) => dispatch(setViewedMovieAction(movieId))
+    setSelectedGenre: (selectedGenre) => dispatch(setSelectedGenreAction(selectedGenre)),
+    setSelectedSort: (selectedSort) => dispatch(setSelectedSortAction(selectedSort)),
+    setSearchText: (searchText) => dispatch(setSearchTextAction(searchText))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieListPage)

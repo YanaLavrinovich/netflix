@@ -1,26 +1,25 @@
 import {
-    CREATE_MOVIE_FAILURE,
-    CREATE_MOVIE_STARTED,
-    CREATE_MOVIE_SUCCESS,
-    DELETE_MOVIE_FAILURE,
-    DELETE_MOVIE_STARTED,
-    DELETE_MOVIE_SUCCESS,
-    FETCH_MOVIES_FAILURE,
-    FETCH_MOVIES_STARTED,
+    FETCH_MOVIE_SUCCESS,
     FETCH_MOVIES_SUCCESS,
+    REQUEST_FAILURE,
+    REQUEST_STARTED,
+    REQUEST_SUCCESS,
     SET_SEARCH_TEXT,
-    SET_VIEWED_MOVIE,
-    UPDATE_MOVIE_FAILURE,
-    UPDATE_MOVIE_STARTED,
-    UPDATE_MOVIE_SUCCESS
+    SET_SELECTED_GENRE,
+    SET_SELECTED_SORT
 } from './types';
 import axios from 'axios';
-import {GENRE_ALL} from '../../layouts/MovieListPage/MovieConstants';
+import {GENRE_ALL} from '../../layouts/common/constants';
 
 
-export const fetchMoviesAction = (selectedGenre, selectedSort, searchText) => {
-    return dispatch => {
-        dispatch(fetchMoviesStarted())
+export const fetchMoviesAction = () => {
+    return (dispatch, getState) => {
+        dispatch(requestStarted())
+        const {searchText, selectedGenre, selectedSort} = getState().movies
+
+        if (searchText === '') {
+            return dispatch(fetchMoviesSuccess([]))
+        }
 
         axios.get('http://localhost:4000/movies', {
             params: {
@@ -36,63 +35,109 @@ export const fetchMoviesAction = (selectedGenre, selectedSort, searchText) => {
                 dispatch(fetchMoviesSuccess(res.data))
             })
             .catch(err => {
-                dispatch(fetchMoviesFailure(err.message))
+                dispatch(requestFailure(err.message))
+            })
+    }
+}
+
+export const fetchMovieByIdAction = (movieId) => {
+    return (dispatch) => {
+        dispatch(requestStarted())
+
+        axios.get(`http://localhost:4000/movies/${movieId}`)
+            .then(res => {
+                dispatch(fetchMovieByIdSuccess(res.data))
+            })
+            .catch(err => {
+                dispatch(requestFailure(err.message))
             })
     }
 }
 
 export const deleteMovieAction = (movieId) => {
     return dispatch => {
-        dispatch(deleteMovieStarted())
+        dispatch(requestStarted())
 
         axios.delete(`http://localhost:4000/movies/${movieId}`)
             .then(res => {
-                dispatch(deleteMovieSuccess())
+                dispatch(requestSuccess())
             })
             .catch(err => {
-                dispatch(deleteMovieFailure(err.message))
+                dispatch(requestFailure(err.message))
+            })
+            .finally(() => {
+                dispatch(fetchMoviesAction())
             })
     }
 }
 
 export const updateMovieAction = (editedMovie) => {
     return dispatch => {
-        dispatch(updateMovieStarted())
+        dispatch(requestStarted())
 
         axios.put('http://localhost:4000/movies', editedMovie)
             .then(res => {
-                dispatch(updateMovieSuccess())
+                dispatch(requestSuccess())
             })
             .catch(err => {
-                dispatch(updateMovieFailure(err.message))
+                dispatch(requestFailure(err.message))
+            })
+            .finally(() => {
+                dispatch(fetchMoviesAction())
             })
     }
 }
 
 export const createMovieAction = (newMovie) => {
     return dispatch => {
-        dispatch(createMovieStarted())
+        dispatch(requestStarted())
 
         axios.post('http://localhost:4000/movies', newMovie)
             .then(res => {
-                dispatch(createMovieSuccess())
+                dispatch(requestSuccess())
             })
             .catch(err => {
-                dispatch(createMovieFailure(err.message))
+                dispatch(requestFailure(err.message))
+            })
+            .finally(() => {
+                dispatch(fetchMoviesAction())
             })
     }
 }
 
-export const setViewedMovieAction = (movieId) => {
-    return {type: SET_VIEWED_MOVIE, payload: movieId}
+export const setSearchTextAction = (searchText) => {
+    return dispatch => {
+        Promise.resolve(dispatch(setSearchTextSuccess(searchText)))
+            .finally(() => {
+                dispatch(fetchMoviesAction())
+            })
+    }
 }
 
-export const setSearchTextAction = (searchText) => {
+export const setSearchTextSuccess = (searchText) => {
     return {type: SET_SEARCH_TEXT, payload: searchText}
 }
 
-const fetchMoviesStarted = () => {
-    return {type: FETCH_MOVIES_STARTED}
+export const setSelectedSortAction = (selectedSort) => {
+    return dispatch => {
+        Promise.resolve(dispatch(setSelectedSortSuccess(selectedSort)))
+            .finally(() => {
+                dispatch(fetchMoviesAction())
+            })
+    }
+}
+
+export const setSelectedSortSuccess = (selectedSort) => {
+    return {type: SET_SELECTED_SORT, payload: selectedSort}
+}
+
+export const setSelectedGenreAction = (selectedGenre) => {
+    return dispatch => {
+        Promise.resolve(dispatch(setSelectedGenreSuccess(selectedGenre)))
+            .finally(() => {
+                dispatch(fetchMoviesAction())
+            })
+    }
 }
 
 const fetchMoviesSuccess = (movies) => {
@@ -102,54 +147,28 @@ const fetchMoviesSuccess = (movies) => {
     }
 }
 
-const fetchMoviesFailure = (error) => {
+const fetchMovieByIdSuccess = (movie) => {
+    return{
+        type: FETCH_MOVIE_SUCCESS,
+        payload: movie
+    }
+}
+
+export const setSelectedGenreSuccess = (selectedGenre) => {
+    return {type: SET_SELECTED_GENRE, payload: selectedGenre}
+}
+
+const requestStarted = () => {
+    return {type: REQUEST_STARTED}
+}
+
+const requestFailure = (error) => {
     return {
-        type: FETCH_MOVIES_FAILURE,
+        type: REQUEST_FAILURE,
         payload: error
     }
 }
 
-const deleteMovieStarted = () => {
-    return {type: DELETE_MOVIE_STARTED}
-}
-
-const deleteMovieSuccess = () => {
-    return {type: DELETE_MOVIE_SUCCESS}
-}
-
-const deleteMovieFailure = (error) => {
-    return {
-        type: DELETE_MOVIE_FAILURE,
-        payload: error
-    }
-}
-
-const updateMovieStarted = () => {
-    return {type: UPDATE_MOVIE_STARTED}
-}
-
-const updateMovieSuccess = () => {
-    return {type: UPDATE_MOVIE_SUCCESS}
-}
-
-const updateMovieFailure = (error) => {
-    return {
-        type: UPDATE_MOVIE_FAILURE,
-        payload: error
-    }
-}
-
-const createMovieStarted = () => {
-    return {type: CREATE_MOVIE_STARTED}
-}
-
-const createMovieSuccess = () => {
-    return {type: CREATE_MOVIE_SUCCESS}
-}
-
-const createMovieFailure = (error) => {
-    return {
-        type: CREATE_MOVIE_FAILURE,
-        payload: error
-    }
+const requestSuccess = () => {
+    return {type: REQUEST_SUCCESS}
 }

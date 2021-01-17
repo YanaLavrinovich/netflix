@@ -3,3 +3,14 @@
   padding: 5px 60px 0 60px;
   min-height: 100vh;
 }
+
+.no-movies-label {
+  font-size: xx-large;
+  font-weight: lighter;
+  color: #ffffff;
+}
+
+.no-movies-container {
+  text-align: center;
+  padding-top: 150px;
+}

@@ -1,35 +1,29 @@
 import {
-    CREATE_MOVIE_FAILURE,
-    CREATE_MOVIE_STARTED,
-    CREATE_MOVIE_SUCCESS,
-    DELETE_MOVIE_FAILURE,
-    DELETE_MOVIE_STARTED,
-    DELETE_MOVIE_SUCCESS,
-    FETCH_MOVIES_FAILURE,
-    FETCH_MOVIES_STARTED,
+    FETCH_MOVIE_SUCCESS,
     FETCH_MOVIES_SUCCESS,
+    REQUEST_FAILURE,
+    REQUEST_STARTED,
+    REQUEST_SUCCESS,
     SET_SEARCH_TEXT,
-    SET_VIEWED_MOVIE,
-    UPDATE_MOVIE_FAILURE,
-    UPDATE_MOVIE_STARTED,
-    UPDATE_MOVIE_SUCCESS
+    SET_SELECTED_GENRE,
+    SET_SELECTED_SORT
 } from '../actions/types';
+import {DATE_SORT, GENRE_ALL} from '../../layouts/common/constants';
 
 const initialState = {
     isLoading: false,
     movies: [],
+    totalAmount: 0,
+    selectedGenre: GENRE_ALL,
+    selectedSort: DATE_SORT,
     error: null,
     viewedMovie: null,
-    searchText: '',
-    isNeedUpdateMovies: false
+    searchText: ''
 };
 
 export function movies(state = initialState, action) {
     switch (action.type) {
-        case FETCH_MOVIES_STARTED:
-        case DELETE_MOVIE_STARTED:
-        case CREATE_MOVIE_STARTED:
-        case UPDATE_MOVIE_STARTED:
+        case REQUEST_STARTED:
             return {
                 ...state,
                 isLoading: true
@@ -40,34 +34,40 @@ export function movies(state = initialState, action) {
                 isLoading: false,
                 error: null,
                 movies: action.payload.data,
-                isNeedUpdateMovies: false
+                totalAmount: action.payload.totalAmount
             }
-        case DELETE_MOVIE_SUCCESS:
-        case CREATE_MOVIE_SUCCESS:
-        case UPDATE_MOVIE_SUCCESS:
+        case FETCH_MOVIE_SUCCESS:
             return {
                 ...state,
+                isLoading: false,
                 error: null,
-                isNeedUpdateMovies: true
+                viewedMovie: action.payload
             }
-        case FETCH_MOVIES_FAILURE:
-        case CREATE_MOVIE_FAILURE:
-        case DELETE_MOVIE_FAILURE:
-        case UPDATE_MOVIE_FAILURE:
+        case REQUEST_SUCCESS:
+            return {
+                ...state,
+                error: null
+            }
+        case REQUEST_FAILURE:
             return {
                 ...state,
                 isLoading: false,
                 error: action.payload.error
             }
-        case SET_VIEWED_MOVIE:
-            return {
-                ...state,
-                viewedMovie: action.payload
-            }
         case SET_SEARCH_TEXT:
             return {
                 ...state,
                 searchText: action.payload
+            }
+        case SET_SELECTED_GENRE:
+            return {
+                ...state,
+                selectedGenre: action.payload
+            }
+        case SET_SELECTED_SORT:
+            return {
+                ...state,
+                selectedSort: action.payload
             }
         default:
             return state;

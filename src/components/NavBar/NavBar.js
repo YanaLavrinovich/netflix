@@ -9,5 +9,5 @@ export function NavBar({children}) {
 }
 
 NavBar.propTypes = {
-    children: PropTypes.array
+    children: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
 }

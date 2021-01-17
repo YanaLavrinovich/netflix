@@ -18,9 +18,9 @@ import {
     WRONG_URL
 } from './constants';
 import {FormDropdown} from '../FormDropdown/FormDropdown';
-import {genres} from '../../layouts/MovieListPage/MovieConstants';
-import {Form, withFormik} from 'formik';
+import {Form, Formik} from 'formik';
 import * as Yup from 'yup';
+import {genres} from "../../layouts/MovieListPage/constants";
 
 const movieDefault = {
     title: '',
@@ -29,7 +29,7 @@ const movieDefault = {
     genres: [],
     overview: '',
     runtime: ''
-}
+};
 
 const movieSchema = Yup.object().shape({
     title: Yup.string()
@@ -49,68 +49,67 @@ const movieSchema = Yup.object().shape({
         .required(REQUIRED_FIELD)
 });
 
-const formikEnhancer = withFormik({
-    mapPropsToValues: ({movie}) => {
-        const editMovie = !!movie ? movie : movieDefault
-        return {...editMovie}
-    },
-    validationSchema: movieSchema,
-    handleSubmit: (values, {props}) => {
-        props.onSubmit(values)
-    }
-})
-
-function MovieForm({
-                       movie,
-                       okLabel,
-                       handleReset,
-                   }) {
-    return <Form>
-        {!!movie &&
-        <FormGroup
-            name='id'
-            label='MOVIE ID'
-            isReadOnly={true}
-        />
-        }
-        <FormGroup
-            name='title'
-            label='TITLE'
-            placeholder={TITLE_PLACEHOLDER}
-        />
-        <FormGroup
-            name='release_date'
-            type='date'
-            label='RELEASE DATE'
-            placeholder={DATE_PLACEHOLDER}
-        />
-        <FormGroup
-            name='poster_path'
-            label='MOVIE URL'
-            placeholder={MOVIE_URL_PLACEHOLDER}
-        />
-        <FormDropdown
-            name='genres'
-            label='GENRE'
-            options={genres}
-            placeholder={GENRE_PLACEHOLDER}
-        />
-        <FormGroup
-            name='overview'
-            label='OVERVIEW'
-            placeholder={OVERVIEW_PLACEHOLDER}
-        />
-        <FormGroup
-            name='runtime'
-            type='number'
-            label='RUNTIME'
-            placeholder={RUNTIME_PLACEHOLDER}
-        />
-        <div className='movie-form-footer'>
-            <BorderButton onClick={handleReset}>{RESET}</BorderButton>
-            <RedButton type='submit'>{okLabel}</RedButton>
-        </div>
-    </Form>
+export function MovieForm({
+                              movie,
+                              okLabel,
+                              onSubmit
+                          }) {
+    return <Formik
+        initialValues={movie || movieDefault}
+        onSubmit={(values) => {
+            onSubmit(values)
+        }}
+        validationSchema={movieSchema}
+    >
+        {props => (
+            <Form>
+                {!!movie &&
+                <FormGroup
+                    name='id'
+                    label='MOVIE ID'
+                    isReadOnly={true}
+                />
+                }
+                <FormGroup
+                    name='title'
+                    label='TITLE'
+                    placeholder={TITLE_PLACEHOLDER}
+                />
+                <FormGroup
+                    name='release_date'
+                    type='date'
+                    label='RELEASE DATE'
+                    placeholder={DATE_PLACEHOLDER}
+                />
+                <FormGroup
+                    name='poster_path'
+                    label='MOVIE URL'
+                    placeholder={MOVIE_URL_PLACEHOLDER}
+                />
+                <FormDropdown
+                    name='genres'
+                    label='GENRE'
+                    options={genres}
+                    placeholder={GENRE_PLACEHOLDER}
+                />
+                <FormGroup
+                    name='overview'
+                    label='OVERVIEW'
+                    placeholder={OVERVIEW_PLACEHOLDER}
+                />
+                <FormGroup
+                    name='runtime'
+                    type='number'
+                    label='RUNTIME'
+                    placeholder={RUNTIME_PLACEHOLDER}
+                />
+                <div className='movie-form-footer'>
+                    <BorderButton onClick={props.handleReset}>{RESET}</BorderButton>
+                    <RedButton type='submit'>{okLabel}</RedButton>
+                </div>
+            </Form>
+        )}
+    </Formik>
 }
 
 MovieForm.propTypes = {
@@ -118,5 +117,3 @@ MovieForm.propTypes = {
     okLabel: PropTypes.string.isRequired,
     onSubmit: PropTypes.func
 }
-
-export default formikEnhancer(MovieForm)
