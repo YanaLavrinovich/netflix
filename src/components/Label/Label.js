@@ -11,5 +11,5 @@ export function Label({children}) {
 }
 
 Label.propTypes = {
-    children: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
+    children: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.string])
 }

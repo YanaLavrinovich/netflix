@@ -1,0 +1,26 @@
+import {popups} from "../../../redux/reducers/popups";
+import {SET_VISIBLE_POPUP_NAME} from "../../../redux/actions/types";
+import {POPUP_TYPE} from "../../../layouts/MoviePopupContainer/constants";
+
+describe('popups reducer', () => {
+    it('should return the initial state', () => {
+        expect(popups(undefined, {})).toEqual(
+            {
+                visiblePopupName: null
+            }
+        )
+    })
+
+    it('should handle SET_VISIBLE_POPUP_NAME', () => {
+        expect(
+            popups([], {
+                type: SET_VISIBLE_POPUP_NAME,
+                payload: POPUP_TYPE.ADD
+            })
+        ).toEqual(
+            {
+                visiblePopupName: POPUP_TYPE.ADD
+            }
+        )
+    })
+})
