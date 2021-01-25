@@ -3,7 +3,7 @@ import './styles.css';
 import {MovieCard} from '../MovieCard/MovieCard';
 import PropTypes from 'prop-types';
 import {Label} from '../Label/Label';
-import {MOVIES_FOUND} from './constants';
+import {MOVIES_FOUND, NO_MOVIE_FOUND} from './constants';
 
 export function MovieList({movies, totalAmount, onMovieDelete, onMovieEdit, onMovieClick}) {
     return (
@@ -25,7 +25,7 @@ export function MovieList({movies, totalAmount, onMovieDelete, onMovieEdit, onMo
                 </div>
             </>
             : <div className='no-movies-container'>
-                <p className='no-movies-label'>No Movie Found</p>
+                <p className='no-movies-label'>{NO_MOVIE_FOUND}</p>
             </div>
     )
 }

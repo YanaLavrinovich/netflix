@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 export function Select({options, selected, onChangeValue}) {
     return (
         <select
+            data-testid='select'
             className='sort-select'
             value={selected}
             onChange={(e) => onChangeValue(e.target.value)}

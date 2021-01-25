@@ -4,7 +4,7 @@ import {Label} from "../../../components/Label/Label";
 
 const labelText = 'Label Text'
 
-test('renders Label', () => {
+test('render Label', () => {
     const {asFragment} = render(<Label>{labelText}</Label>);
 
     expect(asFragment(<Label>{labelText}</Label>)).toMatchSnapshot();
