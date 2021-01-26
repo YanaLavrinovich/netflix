@@ -13,7 +13,7 @@ describe('popups reducer', () => {
 
     it('should handle SET_VISIBLE_POPUP_NAME', () => {
         expect(
-            popups([], {
+            popups(undefined, {
                 type: SET_VISIBLE_POPUP_NAME,
                 payload: POPUP_TYPE.ADD
             })

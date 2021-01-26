@@ -15,7 +15,7 @@ describe('dropdown list', () => {
         />)
 
         expect(getByDisplayValue('Drama')).toBeInTheDocument()
-        expect(getByDisplayValue('Drama')).toBeChecked()
+        expect(getByDisplayValue('Drama').checked).toBeTruthy()
         expect(getByDisplayValue('Romance')).toBeInTheDocument()
         expect(getByDisplayValue('Comedy')).toBeInTheDocument()
     })

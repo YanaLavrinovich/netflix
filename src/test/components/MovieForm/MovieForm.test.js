@@ -12,42 +12,25 @@ import {
     TITLE_PLACEHOLDER
 } from "../../../components/MovieForm/constants";
 import userEvent from "@testing-library/user-event";
-
-const movie = {
-    "id": 337167,
-    "title": "Fifty Shades Freed",
-    "tagline": "Don't miss the climax",
-    "vote_average": 6.1,
-    "vote_count": 1195,
-    "release_date": "2018-02-07",
-    "poster_path": "https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg",
-    "overview": "Believing they have left behind shadowy figures from their past, newlyweds Christian and Ana fully embrace an inextricable connection and shared life of luxury. But just as she steps into her role as Mrs. Grey and he relaxes into an unfamiliar stability, new threats could jeopardize their happy ending before it even begins.",
-    "budget": 55000000,
-    "revenue": 136906000,
-    "genres": [
-        "Drama",
-        "Romance"
-    ],
-    "runtime": 106
-}
+import {MOVIE} from "../../utils/constants";
 
 describe('movie form', () => {
     it('render edit movie form', () => {
         const handleSubmit = jest.fn()
         const {getByText, getByDisplayValue} = render(<MovieForm
-            movie={movie}
+            movie={MOVIE}
             okLabel='SAVE'
             onSubmit={handleSubmit}
         />)
 
-        const idForm = getByText(movie.id)
-        const titleForm = getByDisplayValue(movie.title)
-        const releaseDateForm = getByDisplayValue(movie.release_date)
-        const posterPathForm = getByDisplayValue(movie.poster_path)
+        const idForm = getByText(MOVIE.id)
+        const titleForm = getByDisplayValue(MOVIE.title)
+        const releaseDateForm = getByDisplayValue(MOVIE.release_date)
+        const posterPathForm = getByDisplayValue(MOVIE.poster_path)
         const genresDramaForm = getByText(/Drama/)
         const genresRomanceForm = getByText(/Romance/)
-        const overviewForm = getByDisplayValue(movie.overview)
-        const runtimeForm = getByDisplayValue(movie.runtime)
+        const overviewForm = getByDisplayValue(MOVIE.overview)
+        const runtimeForm = getByDisplayValue(MOVIE.runtime)
 
         expect(idForm).toBeInTheDocument()
         expect(titleForm).toBeInTheDocument()
@@ -86,7 +69,7 @@ describe('movie form', () => {
     it('check on submit click in edit movie form', async () => {
         const handleSubmit = jest.fn()
         render(<MovieForm
-            movie={movie}
+            movie={MOVIE}
             okLabel='SAVE'
             onSubmit={handleSubmit}
         />)
@@ -94,7 +77,7 @@ describe('movie form', () => {
         userEvent.click(screen.getByText('SAVE'))
 
         await waitFor(() =>
-            expect(handleSubmit).toHaveBeenCalledWith({...movie})
+            expect(handleSubmit).toHaveBeenCalledWith({...MOVIE})
         )
     })
 
@@ -118,13 +101,13 @@ describe('movie form', () => {
     it('check validation in form group', async () => {
         const handleSubmit = jest.fn()
         const {getByPlaceholderText, getByText} = render(<MovieForm
-            movie={movie}
+            movie={MOVIE}
             okLabel='SAVE'
             onSubmit={handleSubmit}
         />)
 
         const titleForm = getByPlaceholderText(TITLE_PLACEHOLDER)
-        expect(titleForm).toHaveDisplayValue(movie.title)
+        expect(titleForm).toHaveDisplayValue(MOVIE.title)
 
         fireEvent.change(titleForm, {target: {value: ''}})
         userEvent.click(screen.getByText('SAVE'))
@@ -139,7 +122,7 @@ describe('movie form', () => {
     it('check validation in form dropdown', async () => {
         const handleSubmit = jest.fn()
         const {getByText} = render(<MovieForm
-            movie={{...movie, genres: []}}
+            movie={{...MOVIE, genres: []}}
             okLabel='SAVE'
             onSubmit={handleSubmit}
         />)
@@ -157,7 +140,7 @@ describe('movie form', () => {
     it('show genres options', () => {
         const handleSubmit = jest.fn()
         const {queryByText, getByText} = render(<MovieForm
-            movie={movie}
+            movie={MOVIE}
             okLabel='SAVE'
             onSubmit={handleSubmit}
         />)

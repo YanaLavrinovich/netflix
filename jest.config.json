@@ -3,7 +3,7 @@
   "jest": {
     "verbose": true,
     "setupFiles": [
-      "<rootDir>/src/test/setupTests.js"
+      "<rootDir>/src/setupTests.js"
     ],
     "testRegex": "/*.test.js$",
     "collectCoverage": true,
@@ -17,6 +17,6 @@
         "statements": 0
       }
     },
-    "moduleDirectories": ["node_modules", "src"]
+    "moduleDirectories": ["src"]
   }
 }
