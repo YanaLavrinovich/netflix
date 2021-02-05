@@ -11,6 +11,38 @@ import {
 import axios from 'axios';
 import {GENRE_ALL} from '../../layouts/common/constants';
 
+const fetchMoviesSuccess = (movies) => {
+    return {
+        type: FETCH_MOVIES_SUCCESS,
+        payload: movies
+    }
+}
+
+const fetchMovieByIdSuccess = (movie) => {
+    return {
+        type: FETCH_MOVIE_SUCCESS,
+        payload: movie
+    }
+}
+
+export const setSelectedGenreSuccess = (selectedGenre) => {
+    return {type: SET_SELECTED_GENRE, payload: selectedGenre}
+}
+
+const requestStarted = () => {
+    return {type: REQUEST_STARTED}
+}
+
+const requestFailure = (error) => {
+    return {
+        type: REQUEST_FAILURE,
+        payload: error
+    }
+}
+
+const requestSuccess = () => {
+    return {type: REQUEST_SUCCESS}
+}
 
 export const fetchMoviesAction = () => {
     return (dispatch, getState) => {
@@ -138,37 +170,4 @@ export const setSelectedGenreAction = (selectedGenre) => {
                 dispatch(fetchMoviesAction())
             })
     }
-}
-
-const fetchMoviesSuccess = (movies) => {
-    return {
-        type: FETCH_MOVIES_SUCCESS,
-        payload: movies
-    }
-}
-
-const fetchMovieByIdSuccess = (movie) => {
-    return{
-        type: FETCH_MOVIE_SUCCESS,
-        payload: movie
-    }
-}
-
-export const setSelectedGenreSuccess = (selectedGenre) => {
-    return {type: SET_SELECTED_GENRE, payload: selectedGenre}
-}
-
-const requestStarted = () => {
-    return {type: REQUEST_STARTED}
-}
-
-const requestFailure = (error) => {
-    return {
-        type: REQUEST_FAILURE,
-        payload: error
-    }
-}
-
-const requestSuccess = () => {
-    return {type: REQUEST_SUCCESS}
 }
