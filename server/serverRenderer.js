@@ -11,6 +11,25 @@ const configureStore = require('../src/redux/configureStore').default;
 
 const App = require('../src/App').default;
 
+const handleRequest = (res, htmlData, store, location, context) => {
+    const jsx = <App
+        store={store}
+        location={location}
+        context={context}
+        Router={StaticRouter}
+    />
+    const reactDom = renderToString(jsx);
+
+    return res.end(
+        htmlData.replace(
+            '<div id="root"></div>',
+            `<div id="root">${reactDom}</div>`
+        ).replace(
+            '__REDUX__',
+            JSON.stringify(store.getState())
+        )
+    );
+}
 
 exports = module.exports;
 
@@ -21,10 +40,8 @@ exports.render = () => {
             path: route.path,
             exact: true,
         }));
-        const store = configureStore();
+
         const context = {}
-
-
         const is404 = req._possible404;
 
         if (match || is404) {
@@ -33,7 +50,7 @@ exports.render = () => {
             fs.readFile(filePath, 'utf8', (err, htmlData) => {
                 if (err) {
                     console.error('err', err);
-                    return res.status(404).end(); // WARNING: This 404 will be handled by Express server and won't be your React 404 component.
+                    return res.status(404).end();
                 }
 
                 const location = req.url;
@@ -46,45 +63,15 @@ exports.render = () => {
                     console.log(`SSR of ${req.path}`);
                 }
 
-                if (match.loadData) {
+                const store = configureStore();
+
+                if (match && match?.loadData) {
                     match.loadData(store.dispatch, location)
                     setTimeout(() => {
-                        const jsx = <App
-                            store={store}
-                            location={location}
-                            context={context}
-                            Router={StaticRouter}
-                        />
-                        const reactDom = renderToString(jsx);
-
-                        return res.end(
-                            htmlData.replace(
-                                '<div id="root"></div>',
-                                `<div id="root">${reactDom}</div>`
-                            ).replace(
-                                '__REDUX__',
-                                JSON.stringify(store.getState())
-                            )
-                        );
+                        handleRequest(res, htmlData, store, location, context)
                     }, 500)
                 } else {
-                    const jsx = <App
-                        store={store}
-                        location={location}
-                        context={context}
-                        Router={StaticRouter}
-                    />
-                    const reactDom = renderToString(jsx);
-
-                    return res.end(
-                        htmlData.replace(
-                            '<div id="root"></div>',
-                            `<div id="root">${reactDom}</div>`
-                        ).replace(
-                            '__REDUX__',
-                            JSON.stringify(store.getState())
-                        )
-                    );
+                    handleRequest(res, htmlData, store, location, context)
                 }
             })
         } else {

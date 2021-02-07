@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './styles.css'
-import {Button} from '../Button/Button';
 
 export function BorderButton({children, onClick}) {
     return (
-        <Button
+        <button
             key='reset'
             className='border-button'
             onClick={onClick}
         >
             {children}
-        </Button>
+        </button>
     )
 }
 

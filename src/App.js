@@ -1,7 +1,7 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import {Route, Switch} from 'react-router-dom';
-import {NotFoundPage} from './layouts/NotFoundPage/NotFoundPage';
+import NotFoundPage from './layouts/NotFoundPage/NotFoundPage';
 import MovieListPage from "./layouts/MovieListPage/MovieListPage";
 
 

@@ -9,7 +9,7 @@ import {BorderButton} from '../../components/BorderButton/BorderButton';
 import {useHistory} from 'react-router-dom';
 import {GO_BACK_TO_HOME, PAGE_NOT_FOUND} from './constants';
 
-export function NotFoundPage() {
+export default function NotFoundPage() {
     const history = useHistory()
 
     return (

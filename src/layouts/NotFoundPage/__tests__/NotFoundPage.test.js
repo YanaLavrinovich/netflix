@@ -1,7 +1,7 @@
 import React from "react";
 import {Route} from "react-router-dom";
 import {renderWithRouter} from "../../../testUtils/testUtils";
-import {NotFoundPage} from "../NotFoundPage";
+import NotFoundPage from "../NotFoundPage";
 import {GO_BACK_TO_HOME, PAGE_NOT_FOUND} from "../constants";
 import userEvent from "@testing-library/user-event";
 
