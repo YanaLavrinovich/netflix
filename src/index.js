@@ -5,19 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import configureStore from "./redux/configureStore";
 import {BrowserRouter} from "react-router-dom";
+import {loadableReady} from '@loadable/component'
 
-const initialState = global.window && global.window.__INITIAL_STATE__
-const store = configureStore(initialState);
+const store = configureStore(window.__INITIAL_STATE__);
 
-ReactDOM.hydrate(
-    <React.StrictMode>
+loadableReady(() => {
+    const root = document.getElementById('root')
+    ReactDOM.hydrate(<React.StrictMode>
         <App
             store={store}
             Router={BrowserRouter}
         />
-    </React.StrictMode>,
-    document.getElementById('root')
-);
+    </React.StrictMode>, root)
+})
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -4,7 +4,7 @@ import {FIND_YOUR_MOVIE, SEARCH} from './constants';
 import {useParams} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export function MovieSearcher({onSearchClick}) {
+export default function MovieSearcher({onSearchClick}) {
     const {query} = useParams()
 
     return (

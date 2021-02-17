@@ -1,23 +1,24 @@
-import {StaticRouter} from "react-router";
-import {ROUTES} from "./routes";
+import React from 'react';
+import {matchPath, StaticRouter} from "react-router";
+import path from 'path';
+import {ChunkExtractor} from '@loadable/server'
 
-const React = require('react')
 const renderToString = require('react-dom/server').renderToString;
-const matchPath = require('react-router').matchPath;
-const path = require('path');
 const fs = require('fs');
 const configureStore = require('../src/redux/configureStore').default;
 
-
+const store = configureStore();
 const App = require('../src/App').default;
+const statsFile = path.resolve(path.resolve(__dirname, '../build/asset-manifest.json'))
+const extractor = new ChunkExtractor({statsFile})
 
-const handleRequest = (res, htmlData, store, location, context) => {
-    const jsx = <App
+const handleRequest = ({res, htmlData, location, context}) => {
+    const jsx = extractor.collectChunks(<App
         store={store}
         location={location}
         context={context}
         Router={StaticRouter}
-    />
+    />)
     const reactDom = renderToString(jsx);
 
     return res.end(
@@ -33,50 +34,59 @@ const handleRequest = (res, htmlData, store, location, context) => {
 
 exports = module.exports;
 
-exports.render = () => {
+exports.render = (route) => {
     return (req, res, next) => {
 
-        let match = ROUTES.find(route => matchPath(req.path, {
+        let match = matchPath(req.path, {
             path: route.path,
             exact: true,
-        }));
+        });
 
-        const context = {}
         const is404 = req._possible404;
-
-        if (match || is404) {
-            const filePath = path.resolve(__dirname, '..', 'build', 'index.html');
-
-            fs.readFile(filePath, 'utf8', (err, htmlData) => {
-                if (err) {
-                    console.error('err', err);
-                    return res.status(404).end();
-                }
-
-                const location = req.url;
-
-                if (is404) {
-                    res.writeHead(404, {'Content-Type': 'text/html'})
-                    console.log(`SSR of unrouted path ${req.path} (404 ahead)`)
-                } else {
-                    res.writeHead(200, {'Content-Type': 'text/html'})
-                    console.log(`SSR of ${req.path}`);
-                }
-
-                const store = configureStore();
-
-                if (match && match?.loadData) {
-                    match.loadData(store.dispatch, location)
-                    setTimeout(() => {
-                        handleRequest(res, htmlData, store, location, context)
-                    }, 500)
-                } else {
-                    handleRequest(res, htmlData, store, location, context)
-                }
-            })
-        } else {
+        if (!match && !is404) {
             req._possible404 = true;
             return next();
         }
+
+        const filePath = path.resolve(__dirname, '..', 'build', 'index.html');
+
+        let htmlData;
+
+        try {
+            htmlData = fs.readFileSync(filePath, 'utf8');
+        } catch (err) {
+            console.error('err', err);
+            return res.status(404).end();
+        }
+
+        if (is404) {
+            res.writeHead(404, {'Content-Type': 'text/html'})
+            console.log(`SSR of unrouted path ${req.path} (404 ahead)`)
+        } else {
+            res.writeHead(200, {'Content-Type': 'text/html'})
+            console.log(`SSR of ${req.path}`);
+        }
+
+        if (route.action && req.params) {
+            const param = Object.entries(req.params)[0][1];
+            store.dispatch(route.action(param)).then(() => {
+                handleRequest({
+                    res,
+                    htmlData,
+                    store,
+                    location: req.url,
+                    context: {},
+                })
+            })
+            return;
+        }
+
+        handleRequest({
+            res,
+            htmlData,
+            store,
+            location: req.url,
+            context: {},
+        })
     };
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {Route, Switch} from 'react-router-dom';
 import NotFoundPage from './layouts/NotFoundPage/NotFoundPage';
-import MovieListPage from "./layouts/MovieListPage/MovieListPage";
+import {ROUTES} from "./routes";
 
 
 function App({store, location, context, Router}) {
@@ -10,15 +10,14 @@ function App({store, location, context, Router}) {
         <Provider store={store}>
             <Router location={location} context={context} forceRefresh={false}>
                 <Switch>
-                    <Route path='/film/:id' exact>
-                        <MovieListPage/>
-                    </Route>
-                    <Route path='/search/:query' exact>
-                        <MovieListPage/>
-                    </Route>
-                    <Route path='/' exact>
-                        <MovieListPage/>
-                    </Route>
+                    {ROUTES.map(route => {
+                        return <Route
+                            key={route.id}
+                            path={route.path}
+                            component={route.component}
+                            exact={route.exact}
+                        />
+                    })}
                     <Route>
                         <NotFoundPage/>
                     </Route>

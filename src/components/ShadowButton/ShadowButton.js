@@ -3,7 +3,7 @@ import './styles.css'
 import {Button} from '../Button/Button';
 import PropTypes from 'prop-types';
 
-export function ShadowButton({children, onClick}) {
+export default function ShadowButton({children, onClick}) {
     return (
         <Button
             className='shadow-button'

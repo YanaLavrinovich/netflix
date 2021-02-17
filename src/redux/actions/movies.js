@@ -53,7 +53,7 @@ export const fetchMoviesAction = () => {
             return dispatch(fetchMoviesSuccess([]))
         }
 
-        axios.get('http://localhost:4000/movies', {
+        return axios.get('http://localhost:4000/movies', {
             params: {
                 sortBy: selectedSort,
                 sortOrder: 'desc',
@@ -76,7 +76,7 @@ export const fetchMovieByIdAction = (movieId) => {
     return (dispatch) => {
         dispatch(requestStarted())
 
-        axios.get(`http://localhost:4000/movies/${movieId}`)
+        return axios.get(`http://localhost:4000/movies/${movieId}`)
             .then(res => {
                 dispatch(fetchMovieByIdSuccess(res.data))
             })
@@ -139,10 +139,8 @@ export const createMovieAction = (newMovie) => {
 
 export const setSearchTextAction = (searchText) => {
     return dispatch => {
-        Promise.resolve(dispatch(setSearchTextSuccess(searchText)))
-            .finally(() => {
-                dispatch(fetchMoviesAction())
-            })
+        dispatch(setSearchTextSuccess(searchText))
+        return dispatch(fetchMoviesAction())
     }
 }
 
@@ -152,10 +150,8 @@ export const setSearchTextSuccess = (searchText) => {
 
 export const setSelectedSortAction = (selectedSort) => {
     return dispatch => {
-        Promise.resolve(dispatch(setSelectedSortSuccess(selectedSort)))
-            .finally(() => {
-                dispatch(fetchMoviesAction())
-            })
+        dispatch(setSelectedSortSuccess(selectedSort))
+        return dispatch(fetchMoviesAction())
     }
 }
 
@@ -165,9 +161,7 @@ export const setSelectedSortSuccess = (selectedSort) => {
 
 export const setSelectedGenreAction = (selectedGenre) => {
     return dispatch => {
-        Promise.resolve(dispatch(setSelectedGenreSuccess(selectedGenre)))
-            .finally(() => {
-                dispatch(fetchMoviesAction())
-            })
+        dispatch(setSelectedGenreSuccess(selectedGenre))
+        return dispatch(fetchMoviesAction())
     }
 }

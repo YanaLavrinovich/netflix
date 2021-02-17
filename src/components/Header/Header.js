@@ -1,16 +1,18 @@
 import React, {useEffect} from 'react';
+import loadable from '@loadable/component'
 import './styles.css';
-import {MovieSearcher} from '../MovieSearcher/MovieSearcher';
 import {HeaderLogo} from '../HeaderLogo/HeaderLogo';
-import {ShadowButton} from '../ShadowButton/ShadowButton';
 import {NavBar} from '../NavBar/NavBar';
 import PropTypes from 'prop-types';
-import {MagnifierButton} from '../MagnifierButton/MagnifierButton';
-import {MovieViewer} from '../MovieViewer/MovieViewer';
 import {NETFLIX, PLUS_ADD_MOVIE, ROULETTE} from './constants';
 import {useParams} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchMovieByIdAction} from '../../redux/actions/movies';
+
+const MagnifierButton = loadable(() => import('../MagnifierButton/MagnifierButton'))
+const ShadowButton = loadable(() => import('../ShadowButton/ShadowButton'))
+const MovieViewer = loadable(() => import('../MovieViewer/MovieViewer'))
+const MovieSearcher = loadable(() => import('../MovieSearcher/MovieSearcher'))
 
 const Header = ({
                     viewedMovie,

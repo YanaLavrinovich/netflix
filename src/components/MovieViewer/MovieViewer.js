@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './styles.css';
 import {MIN} from './constants';
 
-export function MovieViewer({movie}) {
+export default function MovieViewer({movie}) {
     const {
         release_date: releaseDate,
         poster_path: posterPath,

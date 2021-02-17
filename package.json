@@ -7,6 +7,8 @@
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-react": "^7.7.4",
     "@babel/register": "^7.7.7",
+    "@loadable/component": "^5.14.1",
+    "@loadable/server": "^5.14.2",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.5.0",
@@ -59,6 +61,7 @@
     ]
   },
   "devDependencies": {
+    "@loadable/babel-plugin": "^5.13.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "history": "^5.0.0",
@@ -69,5 +72,10 @@
     "stylelint": "^13.8.0",
     "stylelint-config-standard": "^20.0.0",
     "webpack": "4.44.2"
+  },
+  "babel": {
+    "plugins": [
+      "@loadable/babel-plugin"
+    ]
   }
 }
