@@ -1,9 +1,10 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import {Route, Switch} from 'react-router-dom';
-import NotFoundPage from './layouts/NotFoundPage/NotFoundPage';
 import {ROUTES} from "./routes";
+import loadable from "@loadable/component";
 
+const NotFoundPage = loadable(() => import('./layouts/NotFoundPage/NotFoundPage'))
 
 function App({store, location, context, Router}) {
     return (

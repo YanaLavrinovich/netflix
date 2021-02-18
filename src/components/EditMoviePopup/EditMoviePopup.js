@@ -4,7 +4,7 @@ import {MovieForm} from '../MovieForm/MovieForm';
 import PropTypes from 'prop-types';
 import {EDIT_MOVIE, SAVE} from './constants';
 
-export default function EditMoviePopup({movie, onClose, onSubmit}) {
+export function EditMoviePopup({movie, onClose, onSubmit}) {
     return (
         <Popup
             title={EDIT_MOVIE}

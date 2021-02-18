@@ -1,5 +1,7 @@
 import React, {useCallback} from 'react';
-import loadable from '@loadable/component'
+import {AddMoviePopup} from '../../components/AddMoviePopup/AddMoviePopup';
+import {EditMoviePopup} from '../../components/EditMoviePopup/EditMoviePopup';
+import {DeleteMoviePopup} from '../../components/DeleteMoviePopup/DeleteMoviePopup';
 import {
     createMovieAction,
     deleteMovieAction,
@@ -9,10 +11,6 @@ import {
 import {connect} from 'react-redux';
 import {setVisiblePopupNameAction} from '../../redux/actions/popups';
 import {POPUP_TYPE} from './constants';
-
-const AddMoviePopup = loadable(() => import('../../components/AddMoviePopup/AddMoviePopup'))
-const EditMoviePopup = loadable(() => import('../../components/EditMoviePopup/EditMoviePopup'))
-const DeleteMoviePopup = loadable(() => import('../../components/DeleteMoviePopup/DeleteMoviePopup'))
 
 function MoviePopupContainer({
                                  currentMovieId,

@@ -3,7 +3,7 @@ import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {JSDOM} from "jsdom"
 import {ADD_MOVIE, SUBMIT} from "../constants";
-import AddMoviePopup from "../AddMoviePopup";
+import {AddMoviePopup} from "../AddMoviePopup";
 
 const dom = new JSDOM();
 global.document = dom.window.document;

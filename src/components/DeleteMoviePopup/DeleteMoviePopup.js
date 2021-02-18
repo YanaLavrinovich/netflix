@@ -5,7 +5,7 @@ import {RedButton} from '../RedButton/RedButton';
 import PropTypes from 'prop-types';
 import {CONFIRM, DELETE_CONFIRM_MESSAGE, DELETE_MOVIE} from './constants';
 
-export default function DeleteMoviePopup({onClose, onConfirm}) {
+export function DeleteMoviePopup({onClose, onConfirm}) {
     return (
         <Popup
             title={DELETE_MOVIE}

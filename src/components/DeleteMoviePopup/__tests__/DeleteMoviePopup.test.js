@@ -2,7 +2,7 @@ import React from 'react';
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {JSDOM} from "jsdom"
-import DeleteMoviePopup from "../DeleteMoviePopup";
+import {DeleteMoviePopup} from "../DeleteMoviePopup";
 import {CONFIRM, DELETE_CONFIRM_MESSAGE, DELETE_MOVIE} from "../constants";
 
 const dom = new JSDOM();
