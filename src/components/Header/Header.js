@@ -32,23 +32,24 @@ const Header = ({
 
                 {!!id
                     ? <MagnifierButton onClick={onMagnifierClick}/>
-                    : <ShadowButton onClick={onAddMovieClick}>{PLUS_ADD_MOVIE}</ShadowButton>}
+                    : <ShadowButton onClick={onAddMovieClick}>{PLUS_ADD_MOVIE}</ShadowButton>
+                }
             </NavBar>
 
             <div className='header-container'>
                 {!!id && !!viewedMovie
                     ? <MovieViewer movie={viewedMovie}/>
-                    : <MovieSearcher onSearchClick={onSearchClick}/>}
+                    : <MovieSearcher onSearchClick={onSearchClick}/>
+                }
             </div>
-
         </div>
     )
 };
 
 Header.propTypes = {
-    onAddMovieClick: PropTypes.func,
-    onMagnifierClick: PropTypes.func,
-    onSearchClick: PropTypes.func
+    onAddMovieClick: PropTypes.func.isRequired,
+    onMagnifierClick: PropTypes.func.isRequired,
+    onSearchClick: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({

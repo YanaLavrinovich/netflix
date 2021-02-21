@@ -18,5 +18,5 @@ export function MovieSearcher({onSearchClick}) {
 }
 
 MovieSearcher.propTypes = {
-    onSearchClick: PropTypes.func
+    onSearchClick: PropTypes.func.isRequired
 }

@@ -3,11 +3,15 @@ import './styles.css'
 import PropTypes from 'prop-types';
 
 export function ShadowLabel({children}) {
-    return (
-        <label className='shadow-label'>{children}</label>
-    )
+    return <label className='shadow-label'>
+        {children}
+    </label>
 }
 
 ShadowLabel.propTypes = {
     children: PropTypes.string
+}
+
+ShadowLabel.defaultProps = {
+    children: ''
 }

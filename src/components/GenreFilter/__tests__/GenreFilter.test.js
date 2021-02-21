@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 import {render, waitFor} from '@testing-library/react'
-import {GenreFilter} from "../../../components/GenreFilter/GenreFilter";
-import userEvent from "@testing-library/user-event";
+import {GenreFilter} from '../GenreFilter';
+import userEvent from '@testing-library/user-event';
 
 
 describe('genre filter', () => {

@@ -11,20 +11,25 @@ export function DropdownValue({value, placeholder, showOptions, onClick, showErr
         'form-dropdown-input-error': showError
     })
 
-    return <label
-        className={inputClasses}
-        onClick={onClick}
-    >
-        {!!value && value.length > 0
-            ? value.join(', ')
-            : <div className='form-dropdown-placeholder'>{placeholder}</div>
-        }
-    </label>
+    return (
+        <label className={inputClasses} onClick={onClick}>
+            {!!value && value.length > 0
+                ? value.join(', ')
+                : <div className='form-dropdown-placeholder'>{placeholder}</div>
+            }
+        </label>
+    )
 }
 
 DropdownValue.propTypes = {
-    value: PropTypes.array,
+    value: PropTypes.arrayOf(PropTypes.string),
     placeholder: PropTypes.string,
     showOptions: PropTypes.bool,
-    onClick: PropTypes.func
+    onClick: PropTypes.func.isRequired
+}
+
+DropdownValue.defaultProps = {
+    value: [],
+    placeholder: '',
+    showOptions: false
 }

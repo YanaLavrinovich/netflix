@@ -1,11 +1,11 @@
-import React from "react";
-import Header from "../../../components/Header/Header";
+import React from 'react';
+import Header from '../../../components/Header/Header';
 import configureStore from 'redux-mock-store';
-import {Route} from "react-router-dom";
-import {Provider} from "react-redux";
-import {PLUS_ADD_MOVIE} from "../../../components/Header/constants";
-import {renderWithRouter} from "../../../testUtils/testUtils";
-import {MOVIE} from "../../../testUtils/constants";
+import {Route} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import {PLUS_ADD_MOVIE} from '../constants';
+import {renderWithRouter} from '../../../testUtils/testUtils';
+import {MOVIE} from '../../../testUtils/constants';
 
 const mockStore = configureStore([]);
 
@@ -33,7 +33,7 @@ describe('header', () => {
                 </Route>
             </Provider>,
             {
-                route: "/film/337167"
+                route: '/film/337167'
             }
         );
 
@@ -65,7 +65,7 @@ describe('header', () => {
                 </Route>
             </Provider>,
             {
-                route: "/"
+                route: '/'
             }
         );
 

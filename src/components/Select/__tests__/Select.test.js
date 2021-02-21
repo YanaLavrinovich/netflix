@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import {render} from '@testing-library/react'
-import {sortOptions} from "../../../layouts/MovieListPage/constants";
-import {Select} from "../../../components/Select/Select";
-import userEvent from "@testing-library/user-event";
+import {sortOptions} from '../../../layouts/MovieListPage/constants';
+import {Select} from '../Select';
+import userEvent from '@testing-library/user-event';
 
 
 describe('select', () => {

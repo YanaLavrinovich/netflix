@@ -1,9 +1,9 @@
 import {render} from '@testing-library/react';
 import React from 'react'
-import {MovieContainer} from "../../../components/MovieContainer/MovieContainer";
-import {sortOptions} from "../../../layouts/MovieListPage/constants";
-import {PLEASE_WAIT} from "../../../components/MovieContainer/constants";
-import {MOVIE} from "../../../testUtils/constants";
+import {MovieContainer} from '../MovieContainer';
+import {sortOptions} from '../../../layouts/MovieListPage/constants';
+import {PLEASE_WAIT} from '../constants';
+import {MOVIE} from '../../../testUtils/constants';
 
 
 describe('render Movie Container', () => {
@@ -14,7 +14,7 @@ describe('render Movie Container', () => {
             totalAmount={1}
             movies={[MOVIE]}
             sortOptions={sortOptions}
-            selectedSort='geners'
+            selectedSort='genres'
             onGenreFilterChange={jest.fn()}
             onSortChange={jest.fn()}
             onMovieDelete={jest.fn()}
@@ -36,7 +36,7 @@ describe('render Movie Container', () => {
             totalAmount={1}
             movies={[MOVIE]}
             sortOptions={sortOptions}
-            selectedSort='geners'
+            selectedSort='genres'
             onGenreFilterChange={jest.fn()}
             onSortChange={jest.fn()}
             onMovieDelete={jest.fn()}

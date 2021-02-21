@@ -3,11 +3,9 @@ import './styles.css'
 import PropTypes from 'prop-types';
 
 export function MagnifierButton({onClick}) {
-    return (
-        <button className='magnifier-button' onClick={onClick}/>
-    )
+    return <button className='magnifier-button' onClick={onClick}/>
 }
 
 MagnifierButton.propTypes = {
-    onClick: PropTypes.func
+    onClick: PropTypes.func.isRequired
 }

@@ -26,3 +26,7 @@ GenreFilter.propTypes = {
     selectedGenre: PropTypes.string,
     onGenreFilterChange: PropTypes.func.isRequired
 }
+
+GenreFilter.defaultProps = {
+    selectedGenre: ''
+}

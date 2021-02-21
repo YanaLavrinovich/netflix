@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 import {render} from '@testing-library/react'
-import {DropdownList} from "../DropdownList";
+import {DropdownList} from '../DropdownList';
 
 
 describe('dropdown list', () => {

@@ -2,10 +2,10 @@ import axios from 'axios';
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
-import {FETCH_MOVIE_SUCCESS, FETCH_MOVIES_SUCCESS, REQUEST_FAILURE, REQUEST_STARTED,} from "../types";
-import {fetchMovieByIdAction, fetchMoviesAction} from "../movies";
+import {FETCH_MOVIE_SUCCESS, FETCH_MOVIES_SUCCESS, REQUEST_FAILURE, REQUEST_STARTED,} from '../types';
+import {fetchMovieByIdAction, fetchMoviesAction} from '../movies';
 import {MOVIE} from '../../../testUtils/constants';
-import {DATE_SORT, GENRE_ALL} from "../../../layouts/common/constants";
+import {DATE_SORT, GENRE_ALL} from '../../../layouts/common/constants';
 
 jest.mock('axios');
 const mockStore = configureStore([thunk]);

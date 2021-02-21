@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {Title} from '../Title/Title';
 import {SearchInput} from '../SearchInput/SearchInput';
 import {RedButton} from '../RedButton/RedButton';
@@ -14,28 +14,29 @@ const searchSchema = Yup.object().shape({
 });
 
 export function SearchForm({title, searchLabel, searchText, onSearchClick}) {
+    const handleSubmitForm = useCallback((values) => {
+        onSearchClick(values.searchText)
+    }, [onSearchClick])
+
     return (
         <Formik
-            initialValues={{
-                searchText: searchText
-            }}
+            initialValues={
+                {
+                    searchText: searchText
+                }
+            }
             validationSchema={searchSchema}
-            onSubmit={(values) => {
-                onSearchClick(values.searchText)
-            }}>
+            onSubmit={handleSubmitForm}>
             {props => (
                 <form className='search-form' onSubmit={props.handleSubmit}>
                     <Title>{title}</Title>
                     <div className='search-form-row'>
-                        <SearchInput
-                            name='searchText'
-                        />
+                        <SearchInput name='searchText'/>
                         <RedButton type='submit'>{searchLabel}</RedButton>
                     </div>
                 </form>
             )}
         </Formik>
-
     )
 }
 
@@ -43,5 +44,11 @@ SearchForm.propTypes = {
     title: PropTypes.string,
     searchLabel: PropTypes.string,
     searchText: PropTypes.string,
-    onSearchClick: PropTypes.func
+    onSearchClick: PropTypes.func.isRequired
 }
+SearchForm.defaultProps = {
+    title: '',
+    searchLabel: '',
+    searchText: ''
+}
+

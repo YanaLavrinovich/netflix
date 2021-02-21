@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 import {render} from '@testing-library/react'
-import {HeaderLogo} from "../../../components/HeaderLogo/HeaderLogo";
-import {NETFLIX, ROULETTE} from "../../../layouts/common/constants";
+import {HeaderLogo} from '../HeaderLogo';
+import {NETFLIX, ROULETTE} from '../../../layouts/common/constants';
 
 
 describe('header logo', () => {

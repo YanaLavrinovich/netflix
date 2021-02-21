@@ -18,3 +18,7 @@ BorderButton.propTypes = {
     children: PropTypes.string,
     onClick: PropTypes.func.isRequired
 }
+
+BorderButton.defaultProps = {
+    children: ''
+}

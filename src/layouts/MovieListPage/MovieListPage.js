@@ -6,12 +6,7 @@ import {FooterLogo} from '../../components/FooterLogo/FooterLogo';
 import {NETFLIX, ROULETTE} from '../common/constants';
 import React, {useCallback, useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-import {
-    fetchMoviesAction,
-    setSearchTextAction,
-    setSelectedGenreAction,
-    setSelectedSortAction
-} from '../../redux/actions/movies';
+import {setSearchTextAction, setSelectedGenreAction, setSelectedSortAction} from '../../redux/actions/movies';
 import {setVisiblePopupNameAction} from '../../redux/actions/popups';
 import MoviePopupContainer from '../MoviePopupContainer/MoviePopupContainer';
 import {POPUP_TYPE} from '../MoviePopupContainer/constants';
@@ -19,17 +14,16 @@ import {useHistory, useParams} from 'react-router-dom';
 import {sortOptions} from './constants';
 import {MACHINE_STATE} from '../../redux/reducers/constants';
 
-function MovieListPage(props) {
+function MovieListPage({
+                           moviesData,
+                           setVisiblePopupName,
+                           setSelectedGenre,
+                           setSelectedSort,
+                           setSearchText
+                       }) {
     const [currentMovieId, setCurrentMovieId] = useState('')
     const history = useHistory()
 
-    const {
-        moviesData,
-        setVisiblePopupName,
-        setSelectedGenre,
-        setSelectedSort,
-        setSearchText
-    } = props
     const {
         movies,
         viewedMovie,
@@ -97,7 +91,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    fetchMovies: () => dispatch(fetchMoviesAction()),
     setVisiblePopupName: (popupName) => dispatch(setVisiblePopupNameAction(popupName)),
     setSelectedGenre: (selectedGenre) => dispatch(setSelectedGenreAction(selectedGenre)),
     setSelectedSort: (selectedSort) => dispatch(setSelectedSortAction(selectedSort)),

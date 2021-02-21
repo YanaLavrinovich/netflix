@@ -1,16 +1,16 @@
-import React from "react";
+import React from 'react';
 import {render} from '@testing-library/react'
-import {MovieCard} from "../../../components/MovieCard/MovieCard";
-import userEvent from "@testing-library/user-event";
-import {DELETE, EDIT} from "../../../components/CarouselButton/constants";
-import {MOVIE} from "../../../testUtils/constants";
+import {MovieCard} from '../MovieCard';
+import userEvent from '@testing-library/user-event';
+import {DELETE, EDIT} from '../../CarouselButton/constants';
+import {MOVIE} from '../../../testUtils/constants';
 
 describe('movie card', () => {
     it('render movie card', () => {
         const {asFragment} = render(<MovieCard
             movie={MOVIE}
-            onDeleteClick={jest.fn()}
-            onEditClick={jest.fn()}
+            onMovieDelete={jest.fn()}
+            onMovieEdit={jest.fn()}
             onMovieClick={jest.fn()}
         />)
 

@@ -1,17 +1,31 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import PropTypes from 'prop-types';
 import './styles.css'
 import {MovieImage} from '../MovieImage/MovieImage';
 import {MovieCardInfo} from '../MovieCardInfo/MovieCardInfo';
 
 export function MovieCard({movie, onMovieDelete, onMovieEdit, onMovieClick}) {
+    const {id} = movie
+
+    const handleDeleteClick = useCallback(() => {
+        onMovieDelete(id)
+    }, [id, onMovieDelete])
+
+    const handleEditClick = useCallback(() => {
+        onMovieEdit(id)
+    }, [id, onMovieEdit])
+
+    const handleMovieClick = useCallback(() => {
+        onMovieClick(id)
+    }, [id, onMovieClick])
+
     return (
         <div className='movie-card'>
             <MovieImage
                 image={movie.poster_path}
-                onDeleteClick={() => onMovieDelete(movie.id)}
-                onEditClick={() => onMovieEdit(movie.id)}
-                onMovieClick={() => onMovieClick(movie.id)}
+                onDeleteClick={handleDeleteClick}
+                onEditClick={handleEditClick}
+                onMovieClick={handleMovieClick}
             />
             <MovieCardInfo movie={movie}/>
         </div>
@@ -26,7 +40,7 @@ MovieCard.propTypes = {
         poster_path: PropTypes.string,
         release_date: PropTypes.string.isRequired
     }).isRequired,
-    onMovieDelete: PropTypes.func,
-    onMovieEdit: PropTypes.func,
-    onMovieClick: PropTypes.func
+    onMovieDelete: PropTypes.func.isRequired,
+    onMovieEdit: PropTypes.func.isRequired,
+    onMovieClick: PropTypes.func.isRequired
 }

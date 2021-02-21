@@ -1,6 +1,6 @@
-import {movies} from "../movies";
-import {MACHINE_STATE} from "../constants";
-import {DATE_SORT, GENRE_ALL} from "../../../layouts/common/constants";
+import {movies} from '../movies';
+import {MACHINE_STATE} from '../constants';
+import {DATE_SORT, GENRE_ALL} from '../../../layouts/common/constants';
 import {
     FETCH_MOVIE_SUCCESS,
     FETCH_MOVIES_SUCCESS,
@@ -10,8 +10,8 @@ import {
     SET_SEARCH_TEXT,
     SET_SELECTED_GENRE,
     SET_SELECTED_SORT
-} from "../../actions/types";
-import {MOVIE} from "../../../testUtils/constants";
+} from '../../actions/types';
+import {MOVIE} from '../../../testUtils/constants';
 
 describe('movies reducer', () => {
     it('should return the initial state', () => {

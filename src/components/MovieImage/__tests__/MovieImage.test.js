@@ -1,6 +1,6 @@
 import {render} from '@testing-library/react';
 import React from 'react'
-import {MovieImage} from "../../../components/MovieImage/MovieImage";
+import {MovieImage} from '../MovieImage';
 
 test('render Movie Image', () => {
     const {asFragment} = render(<MovieImage

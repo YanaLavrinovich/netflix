@@ -27,7 +27,11 @@ export function MovieImage({
 
 MovieImage.propTypes = {
     image: PropTypes.string,
-    onDeleteClick: PropTypes.func,
-    onEditClick: PropTypes.func,
-    onMovieClick: PropTypes.func
+    onDeleteClick: PropTypes.func.isRequired,
+    onEditClick: PropTypes.func.isRequired,
+    onMovieClick: PropTypes.func.isRequired
+}
+
+MovieImage.defaultProps = {
+    image: ''
 }

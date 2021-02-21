@@ -1,7 +1,7 @@
 import {render} from '@testing-library/react';
 import React from 'react'
-import {MovieFilter} from "../../../components/MovieFilter/MovieFilter";
-import {sortOptions} from "../../../layouts/MovieListPage/constants";
+import {MovieFilter} from '../MovieFilter';
+import {sortOptions} from '../../../layouts/MovieListPage/constants';
 
 test('render Movie Filter', () => {
     const onSortChange = jest.fn()

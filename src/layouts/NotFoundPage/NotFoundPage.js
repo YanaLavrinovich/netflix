@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {FooterLogo} from '../../components/FooterLogo/FooterLogo';
 import {NETFLIX, ROULETTE} from '../common/constants';
 import {Footer} from '../../components/Footer/Footer';
@@ -12,6 +12,10 @@ import {GO_BACK_TO_HOME, PAGE_NOT_FOUND} from './constants';
 export default function NotFoundPage() {
     const history = useHistory()
 
+    const handleClickBack = useCallback(() => {
+        history.push('/')
+    }, [history])
+
     return (
         <div className='not-found-layout'>
             <NavBar>
@@ -20,9 +24,7 @@ export default function NotFoundPage() {
             <div className='not-found-container'>
                 <p className='not-found-label'>{PAGE_NOT_FOUND}</p>
                 <div className='not-found-image'/>
-                <BorderButton onClick={() => {
-                    history.push('/')
-                }}>
+                <BorderButton onClick={handleClickBack}>
                     {GO_BACK_TO_HOME}
                 </BorderButton>
             </div>

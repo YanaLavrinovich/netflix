@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import {render} from '@testing-library/react'
-import {SortFilter} from "../../../components/SortFilter/SortFilter";
-import {sortOptions} from "../../../layouts/MovieListPage/constants";
-import {SORT_BY} from "../../../components/SortFilter/constants";
+import {SortFilter} from '../SortFilter';
+import {sortOptions} from '../../../layouts/MovieListPage/constants';
+import {SORT_BY} from '../constants';
 
 
 describe('sort filter', () => {

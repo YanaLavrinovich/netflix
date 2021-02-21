@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 import {fireEvent, render, screen, waitFor} from '@testing-library/react'
-import {REQUIRED_FIELD} from "../../../components/MovieForm/constants";
-import userEvent from "@testing-library/user-event";
-import {SearchForm} from "../../../components/SearchForm/SearchForm";
-import {FIND_YOUR_MOVIE, SEARCH} from "../../../components/MovieSearcher/constants";
-import {SEARCH_INPUT_PLACEHOLDER} from "../../../components/SearchInput/constants";
+import {REQUIRED_FIELD} from '../../MovieForm/constants';
+import userEvent from '@testing-library/user-event';
+import {SearchForm} from '../SearchForm';
+import {FIND_YOUR_MOVIE, SEARCH} from '../../MovieSearcher/constants';
+import {SEARCH_INPUT_PLACEHOLDER} from '../../SearchInput/constants';
 
 
 describe('search form', () => {

@@ -26,3 +26,8 @@ Popup.propTypes = {
     title: PropTypes.string,
     children: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
 }
+
+Popup.defaultProps = {
+    title: '',
+    children: []
+}

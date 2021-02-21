@@ -1,6 +1,6 @@
-import {popups} from "../popups";
-import {SET_VISIBLE_POPUP_NAME} from "../../actions/types";
-import {POPUP_TYPE} from "../../../layouts/MoviePopupContainer/constants";
+import {popups} from '../popups';
+import {SET_VISIBLE_POPUP_NAME} from '../../actions/types';
+import {POPUP_TYPE} from '../../../layouts/MoviePopupContainer/constants';
 
 describe('popups reducer', () => {
     it('should return the initial state', () => {

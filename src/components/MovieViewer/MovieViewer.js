@@ -40,5 +40,11 @@ export function MovieViewer({movie}) {
 }
 
 MovieViewer.propTypes = {
-    movieId: PropTypes.string
+    movie: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        tagline: PropTypes.string,
+        poster_path: PropTypes.string,
+        release_date: PropTypes.string.isRequired
+    }).isRequired
 }

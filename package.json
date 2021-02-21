@@ -9,6 +9,7 @@
     "@babel/register": "^7.7.7",
     "@loadable/component": "^5.14.1",
     "@loadable/server": "^5.14.2",
+    "@storybook/addon-knobs": "^6.1.18",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.5.0",
@@ -41,7 +42,9 @@
     "eject": "react-scripts eject",
     "run-server": "node server/bootstrap.js",
     "start-server": "npm-run-all build run-server",
-    "test-coverage": "npm test -- --coverage --watchAll=false"
+    "test-coverage": "npm test -- --coverage --watchAll=false",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
@@ -63,6 +66,12 @@
   },
   "devDependencies": {
     "@loadable/babel-plugin": "^5.13.2",
+    "@storybook/addon-actions": "^6.1.18",
+    "@storybook/addon-essentials": "^6.1.18",
+    "@storybook/addon-links": "^6.1.18",
+    "@storybook/node-logger": "^6.1.18",
+    "@storybook/preset-create-react-app": "^3.1.6",
+    "@storybook/react": "^6.1.18",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "history": "^5.0.0",

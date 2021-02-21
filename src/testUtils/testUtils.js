@@ -1,12 +1,12 @@
-import React from "react";
-import {createMemoryHistory} from "history";
-import {Route, Router} from "react-router-dom";
-import {render} from "@testing-library/react";
+import React from 'react';
+import {createMemoryHistory} from 'history';
+import {Route, Router} from 'react-router-dom';
+import {render} from '@testing-library/react';
 
 export function renderWithRouter(
     ui,
     {
-        route = "/",
+        route = '/',
         history = createMemoryHistory({initialEntries: [route]})
     } = {}
 ) {

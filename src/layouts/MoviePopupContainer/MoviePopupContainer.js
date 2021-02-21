@@ -1,7 +1,5 @@
 import React, {useCallback} from 'react';
-import {AddMoviePopup} from '../../components/AddMoviePopup/AddMoviePopup';
-import {EditMoviePopup} from '../../components/EditMoviePopup/EditMoviePopup';
-import {DeleteMoviePopup} from '../../components/DeleteMoviePopup/DeleteMoviePopup';
+import loadable from '@loadable/component'
 import {
     createMovieAction,
     deleteMovieAction,
@@ -11,6 +9,10 @@ import {
 import {connect} from 'react-redux';
 import {setVisiblePopupNameAction} from '../../redux/actions/popups';
 import {POPUP_TYPE} from './constants';
+
+const AddMoviePopup = loadable(() => import('../../components/AddMoviePopup/AddMoviePopup'))
+const EditMoviePopup = loadable(() => import('../../components/EditMoviePopup/EditMoviePopup'))
+const DeleteMoviePopup = loadable(() => import('../../components/DeleteMoviePopup/DeleteMoviePopup'))
 
 function MoviePopupContainer({
                                  currentMovieId,
@@ -44,24 +46,32 @@ function MoviePopupContainer({
         setViewedMovie(viewedMovie?.id !== currentMovieId ? viewedMovie : null)
     }, [viewedMovie, currentMovieId, deleteMovie, setVisiblePopupName, setViewedMovie])
 
+    const handleClosePopup = useCallback(() => {
+        setVisiblePopupName('')
+    }, [setVisiblePopupName])
+
+    const findMovieById = useCallback(() => {
+        return movies.find(movie => movie.id === currentMovieId)
+    }, [movies, currentMovieId])
+
     return <>
         {visiblePopupName === POPUP_TYPE.ADD &&
         <AddMoviePopup
             onSubmit={handleSubmitMovie}
-            onClose={() => setVisiblePopupName('')}
+            onClose={handleClosePopup}
         />}
 
         {visiblePopupName === POPUP_TYPE.EDIT &&
         <EditMoviePopup
-            movie={movies.find(movie => movie.id === currentMovieId)}
+            movie={findMovieById}
             onSubmit={handleMovieEditSave}
-            onClose={() => setVisiblePopupName('')}
+            onClose={handleClosePopup}
         />}
 
         {visiblePopupName === POPUP_TYPE.DELETE &&
         <DeleteMoviePopup
             onConfirm={handleMovieDelete}
-            onClose={() => setVisiblePopupName('')}
+            onClose={handleClosePopup}
         />}
     </>
 }

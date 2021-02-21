@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 import {render} from '@testing-library/react';
-import configureStore from "redux-mock-store";
-import {MOVIE} from "../../../testUtils/constants";
-import {Provider} from "react-redux";
-import MoviePopupContainer from "../MoviePopupContainer";
-import {ADD_MOVIE} from "../../../components/AddMoviePopup/constants";
-import {DELETE_MOVIE} from "../../../components/DeleteMoviePopup/constants";
-import {EDIT_MOVIE} from "../../../components/EditMoviePopup/constants";
+import configureStore from 'redux-mock-store';
+import {MOVIE} from '../../../testUtils/constants';
+import {Provider} from 'react-redux';
+import MoviePopupContainer from '../MoviePopupContainer';
+import {ADD_MOVIE} from '../../../components/AddMoviePopup/constants';
+import {DELETE_MOVIE} from '../../../components/DeleteMoviePopup/constants';
+import {EDIT_MOVIE} from '../../../components/EditMoviePopup/constants';
 
 const mockStore = configureStore([]);
 

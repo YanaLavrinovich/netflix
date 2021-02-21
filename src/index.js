@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import configureStore from "./redux/configureStore";
-import {BrowserRouter} from "react-router-dom";
+import configureStore from './redux/configureStore';
+import {BrowserRouter} from 'react-router-dom';
 import {loadableReady} from '@loadable/component'
 
 const store = configureStore(window.__INITIAL_STATE__);

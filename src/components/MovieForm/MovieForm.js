@@ -115,5 +115,9 @@ export function MovieForm({
 MovieForm.propTypes = {
     movie: PropTypes.object,
     okLabel: PropTypes.string.isRequired,
-    onSubmit: PropTypes.func
+    onSubmit: PropTypes.func.isRequired
+}
+
+MovieForm.defaultProps = {
+    movie: null
 }

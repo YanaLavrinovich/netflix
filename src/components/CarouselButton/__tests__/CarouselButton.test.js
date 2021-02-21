@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import {render} from '@testing-library/react'
-import {CarouselButton} from "../CarouselButton";
-import {DELETE, EDIT} from "../constants";
-import userEvent from "@testing-library/user-event";
+import {CarouselButton} from '../CarouselButton';
+import {DELETE, EDIT} from '../constants';
+import userEvent from '@testing-library/user-event';
 
 
 describe('carousel button', () => {

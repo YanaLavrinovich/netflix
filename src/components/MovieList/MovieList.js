@@ -37,7 +37,12 @@ MovieList.propTypes = {
         })
     ),
     totalAmount: PropTypes.number,
-    onMovieDelete: PropTypes.func,
-    onMovieEdit: PropTypes.func,
-    onMovieClick: PropTypes.func
+    onMovieDelete: PropTypes.func.isRequired,
+    onMovieEdit: PropTypes.func.isRequired,
+    onMovieClick: PropTypes.func.isRequired
+}
+
+MovieList.defaultProps = {
+    movies: [],
+    totalAmount: 0
 }

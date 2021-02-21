@@ -1,9 +1,9 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import {JSDOM} from "jsdom"
-import {EDIT_MOVIE, SAVE} from "../constants";
-import {EditMoviePopup} from "../EditMoviePopup";
+import {render} from '@testing-library/react';
+import {JSDOM} from 'jsdom'
+import {EDIT_MOVIE, SAVE} from '../constants';
+import EditMoviePopup from '../EditMoviePopup';
+import {MOVIE} from "../../../testUtils/constants";
 
 const dom = new JSDOM();
 global.document = dom.window.document;
@@ -16,13 +16,15 @@ it('should create a add movie popup', () => {
     container.setAttribute('id', 'modal-root');
     document.body.appendChild(container);
 
-    const {unmount} = render(<EditMoviePopup onClose={handleClose} onSubmit={handleSubmit}/>);
+    const {getByText} = render(
+        <EditMoviePopup
+            movie={MOVIE}
+            onClose={handleClose}
+            onSubmit={handleSubmit}
+        />
+    );
 
-    expect(screen.getByText(EDIT_MOVIE)).toBeInTheDocument();
-    expect(screen.getByText(SAVE)).toBeInTheDocument()
-    userEvent.click(screen.getByText('×'));
-    unmount();
-    expect(handleClose).toBeCalledTimes(1);
-    expect(screen.queryByText(EDIT_MOVIE)).not.toBeInTheDocument();
+    expect(getByText(EDIT_MOVIE)).toBeInTheDocument();
+    expect(getByText(SAVE)).toBeInTheDocument()
 })
 

@@ -7,10 +7,7 @@ import PropTypes from 'prop-types';
 export function GenreButton({children, onClick, isActive}) {
     const buttonClass = classNames('genre-button', {active: isActive})
     return (
-        <Button
-            className={buttonClass}
-            onClick={onClick}
-        >
+        <Button className={buttonClass} onClick={onClick}>
             {children}
         </Button>
     )
@@ -20,4 +17,9 @@ GenreButton.propTypes = {
     children: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     isActive: PropTypes.bool
+}
+
+GenreButton.defaultProps = {
+    children: '',
+    isActive: false
 }

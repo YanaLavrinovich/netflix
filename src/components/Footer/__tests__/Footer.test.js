@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import {render} from '@testing-library/react'
-import {Footer} from "../../../components/Footer/Footer";
-import {NETFLIX, ROULETTE} from "../../../layouts/common/constants";
-import {FooterLogo} from "../../../components/FooterLogo/FooterLogo";
+import {Footer} from '../Footer';
+import {NETFLIX, ROULETTE} from '../../../layouts/common/constants';
+import {FooterLogo} from '../../FooterLogo/FooterLogo';
 
 
 describe('footer', () => {

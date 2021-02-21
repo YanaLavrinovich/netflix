@@ -40,7 +40,6 @@ export const MovieContainer = ({
                     />
                     : <Label><b>{PLEASE_WAIT}</b></Label>
             }
-
         </div>
     )
 }
@@ -52,9 +51,18 @@ MovieContainer.propTypes = {
     totalAmount: PropTypes.number,
     sortOptions: PropTypes.array,
     selectedSort: PropTypes.string,
-    onSortChange: PropTypes.func,
-    onGenreFilterChange: PropTypes.func,
-    onMovieDelete: PropTypes.func,
-    onMovieEdit: PropTypes.func,
-    onMovieClick: PropTypes.func
+    onSortChange: PropTypes.func.isRequired,
+    onGenreFilterChange: PropTypes.func.isRequired,
+    onMovieDelete: PropTypes.func.isRequired,
+    onMovieEdit: PropTypes.func.isRequired,
+    onMovieClick: PropTypes.func.isRequired
+}
+
+MovieContainer.defaultProps = {
+    isLoading: false,
+    selectedGenre: '',
+    movies: [],
+    totalAmount: 0,
+    sortOptions: [],
+    selectedSort: ''
 }

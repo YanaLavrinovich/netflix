@@ -16,5 +16,9 @@ export function ShadowButton({children, onClick}) {
 
 ShadowButton.propTypes = {
     children: PropTypes.string,
-    onClick: PropTypes.func
+    onClick: PropTypes.func.isRequired
+}
+
+ShadowButton.defaultProps = {
+    children: ''
 }

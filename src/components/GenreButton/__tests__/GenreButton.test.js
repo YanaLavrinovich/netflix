@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 import {render} from '@testing-library/react'
-import {GenreButton} from "../../../components/GenreButton/GenreButton";
+import {GenreButton} from '../GenreButton';
 
 
 describe('genre button', () => {

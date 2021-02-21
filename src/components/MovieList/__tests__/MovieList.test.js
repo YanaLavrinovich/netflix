@@ -1,8 +1,8 @@
 import {render} from '@testing-library/react';
 import React from 'react'
-import {MovieList} from "../../../components/MovieList/MovieList";
-import {NO_MOVIE_FOUND} from "../../../components/MovieList/constants";
-import {MOVIE} from "../../../testUtils/constants";
+import {MovieList} from '../MovieList';
+import {NO_MOVIE_FOUND} from '../constants';
+import {MOVIE} from '../../../testUtils/constants';
 
 describe('render Movie List', () => {
     it('render Movie List without movies', () => {

@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 import {render} from '@testing-library/react'
-import {CloseButton} from "../CloseButton";
+import {CloseButton} from '../CloseButton';
 
 
 describe('close button', () => {

@@ -1,6 +1,6 @@
 import {render} from '@testing-library/react';
 import React from 'react'
-import {Label} from "../../../components/Label/Label";
+import {Label} from '../Label';
 
 const labelText = 'Label Text'
 

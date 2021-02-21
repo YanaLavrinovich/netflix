@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import PropTypes from 'prop-types';
 import './styles.css'
 import {DropdownValue} from '../DropdownValue/DropdownValue';
@@ -10,6 +10,10 @@ export function FormDropdown({placeholder, label, options, name}) {
     const [field, meta] = useField(name);
     const showError = meta.touched && meta.error;
 
+    const handleClickShowOptions = useCallback(() => {
+        setShowOptions(!showOptions)
+    }, [showOptions, setShowOptions])
+
     return (
         <div className='form-dropdown'>
             <label className='form-dropdown-label'>{label}</label>
@@ -19,7 +23,7 @@ export function FormDropdown({placeholder, label, options, name}) {
                     placeholder={placeholder}
                     showOptions={showOptions}
                     showError={showError}
-                    onClick={() => setShowOptions(!showOptions)}
+                    onClick={handleClickShowOptions}
                 />
 
                 {showOptions && <DropdownList
@@ -39,7 +43,14 @@ export function FormDropdown({placeholder, label, options, name}) {
 
 FormDropdown.propTypes = {
     label: PropTypes.string,
-    options: PropTypes.array,
+    options: PropTypes.arrayOf(PropTypes.string),
     placeholder: PropTypes.string,
     name: PropTypes.string
+}
+
+FormDropdown.defaultProps = {
+    label: '',
+    options: [],
+    placeholder: '',
+    name: ''
 }

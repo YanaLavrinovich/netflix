@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 import {fireEvent, render, screen, waitFor} from '@testing-library/react'
-import {MovieForm} from "../../../components/MovieForm/MovieForm";
+import {MovieForm} from '../MovieForm';
 import {
     AT_LEAST_ONE_GENRE,
     DATE_PLACEHOLDER,
@@ -10,9 +10,9 @@ import {
     REQUIRED_FIELD,
     RUNTIME_PLACEHOLDER,
     TITLE_PLACEHOLDER
-} from "../../../components/MovieForm/constants";
-import userEvent from "@testing-library/user-event";
-import {MOVIE} from "../../../testUtils/constants";
+} from '../constants';
+import userEvent from '@testing-library/user-event';
+import {MOVIE} from '../../../testUtils/constants';
 
 describe('movie form', () => {
     it('render edit movie form', () => {

@@ -35,3 +35,7 @@ export function SearchInput({name}) {
 SearchInput.propTypes = {
     name: PropTypes.string
 }
+
+SearchInput.defaultProps = {
+    name: ''
+}

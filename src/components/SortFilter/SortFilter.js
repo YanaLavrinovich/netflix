@@ -25,6 +25,11 @@ SortFilter.propTypes = {
         })
     ),
     selectedSort: PropTypes.string,
-    onSortChange: PropTypes.func
+    onSortChange: PropTypes.func.isRequired
+}
+
+SortFilter.defaultProps = {
+    sortOptions: [],
+    selectedSort: ''
 }
 

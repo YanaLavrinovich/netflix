@@ -25,6 +25,12 @@ MovieFilter.propTypes = {
     sortOptions: PropTypes.array,
     selectedGenre: PropTypes.string,
     selectedSort: PropTypes.string,
-    onSortChange: PropTypes.func,
-    onGenreFilterChange: PropTypes.func
+    onSortChange: PropTypes.func.isRequired,
+    onGenreFilterChange: PropTypes.func.isRequired
+}
+
+MovieFilter.defaultProps = {
+    sortOptions: [],
+    selectedGenre: '',
+    selectedSort: ''
 }

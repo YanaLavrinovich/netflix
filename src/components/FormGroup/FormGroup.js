@@ -38,7 +38,6 @@ export function FormGroup({
                 </>
                 : <div className='form-group-read-only-input'>{meta.value}</div>
             }
-
         </div>
     )
 }
@@ -49,4 +48,12 @@ FormGroup.propTypes = {
     name: PropTypes.string,
     placeholder: PropTypes.string,
     isReadOnly: PropTypes.bool
+}
+
+FormGroup.defaultProps = {
+    type: '',
+    label: '',
+    name: '',
+    placeholder: '',
+    isReadOnly: false
 }

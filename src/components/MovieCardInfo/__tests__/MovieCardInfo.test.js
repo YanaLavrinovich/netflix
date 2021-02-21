@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 import {render} from '@testing-library/react'
-import {MovieCardInfo} from "../../../components/MovieCardInfo/MovieCardInfo";
-import {MOVIE} from "../../../testUtils/constants";
+import {MovieCardInfo} from '../MovieCardInfo';
+import {MOVIE} from '../../../testUtils/constants';
 
 describe('movie card info', () => {
     it('render movie card info', () => {
